@@ -1,0 +1,174 @@
+"use client";
+
+import { animated, useSpring, useInView } from "@react-spring/web";
+import { githubContributions as data } from "@/content/github-contributions";
+import { usePrefersReducedMotion } from "@/lib/motion-preferences";
+
+const STATE_STYLES: Record<string, string> = {
+  merged: "text-accent-add",
+  open: "text-accent-link",
+  closed: "text-accent-remove",
+};
+
+const STATE_GLYPH: Record<string, string> = {
+  merged: "●",
+  open: "○",
+  closed: "×",
+};
+
+function UpstreamPanel() {
+  const rows = data.upstream;
+
+  return (
+    <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
+      {rows.map((repo) => (
+        <div key={repo.key} className="bg-bg-raised p-5">
+          <div className="flex items-baseline justify-between gap-3">
+            <a
+              href={repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-sm text-text-primary hover:text-accent-link"
+            >
+              {repo.label}
+            </a>
+            <p className="font-mono text-xs text-text-muted">
+              {repo.total} PRs
+            </p>
+          </div>
+
+          <div
+            className="mt-3 flex gap-4 font-mono text-xs"
+            aria-label={`${repo.merged} merged, ${repo.open} open, ${repo.closedUnmerged} closed without merge`}
+          >
+            <span className="text-accent-add">{repo.merged} merged</span>
+            <span className="text-accent-link">{repo.open} open</span>
+            {repo.closedUnmerged > 0 && (
+              <span className="text-accent-remove">
+                {repo.closedUnmerged} closed
+              </span>
+            )}
+          </div>
+
+          <ul className="mt-4 space-y-2">
+            {repo.recent.map((pr) => (
+              <li key={pr.number} className="text-xs leading-snug">
+                <a
+                  href={pr.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex gap-2"
+                >
+                  <span
+                    className={`${STATE_STYLES[pr.state]} shrink-0`}
+                    aria-hidden
+                  >
+                    {STATE_GLYPH[pr.state]}
+                  </span>
+                  <span className="text-text-muted transition-colors group-hover:text-text-primary">
+                    #{pr.number} {pr.title}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function ContributionsSection() {
+  const reduced = usePrefersReducedMotion();
+  const [inViewRef, inView] = useInView({ rootMargin: "-10% 0px", once: true });
+  const springs = useSpring({
+    from: { opacity: 0, y: 24 },
+    to: { opacity: inView || reduced ? 1 : 0, y: inView || reduced ? 0 : 24 },
+    config: { tension: 110, friction: 24 },
+  });
+
+  const { total, activeDays, bestDay } = data.calendar;
+
+  return (
+    <section
+      id="contributions"
+      ref={inViewRef as React.Ref<HTMLElement>}
+      className="overflow-hidden bg-bg px-6 py-24 md:px-12"
+      aria-labelledby="contributions-heading"
+    >
+      <animated.div
+        style={{ opacity: springs.opacity, transform: springs.y.to((y) => `translate3d(0, ${y}px, 0)`) }}
+        className="mx-auto max-w-6xl"
+      >
+        <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase text-accent-add">
+              git shortlog
+            </p>
+            <h2
+              id="contributions-heading"
+              className="mt-3 font-display text-3xl md:text-5xl"
+            >
+              A year of commits, in three dimensions.
+            </h2>
+            <p className="mt-4 font-mono text-sm leading-relaxed text-text-muted">
+              The last 12 months of contributions, extruded into a commit
+              skyline — regenerated straight from GitHub, not hand-placed.
+            </p>
+          </div>
+
+          <dl className="flex shrink-0 gap-8 font-mono">
+            <div>
+              <dt className="text-xs uppercase text-text-muted">total</dt>
+              <dd className="mt-1 text-2xl text-accent-add">{total}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase text-text-muted">active days</dt>
+              <dd className="mt-1 text-2xl text-text-primary">{activeDays}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase text-text-muted">best day</dt>
+              <dd className="mt-1 text-2xl text-text-primary">
+                {bestDay?.count ?? 0}
+                <span className="ml-1 text-xs text-text-muted">
+                  {bestDay?.date.slice(5)}
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure className="border border-border bg-bg-raised/40 p-2 md:p-4">
+          {/* Generated by yoshi389111/github-profile-3d-contrib with the
+              site's amber palette (scripts/3d-contrib-settings.json).
+              Refresh: npm run fetch:contrib-svg */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- static SVG from /public; next/image adds nothing and requires dangerouslyAllowSVG */}
+          <img
+            src="/github-3d-contrib.svg"
+            alt={`3D isometric contribution calendar: ${total} contributions across ${activeDays} active days in the last 12 months`}
+            className="h-auto w-full"
+            loading="lazy"
+          />
+          <figcaption className="px-2 pb-1 pt-2 font-mono text-[0.65rem] text-text-muted">
+            generated with github-profile-3d-contrib · palette: amber phosphor
+            v2
+          </figcaption>
+        </figure>
+
+        <div className="mt-12">
+          <p className="font-mono text-xs uppercase text-accent-add">
+            upstream — PRs into the frameworks I use
+          </p>
+          <div className="mt-5">
+            <UpstreamPanel />
+          </div>
+          <p className="mt-4 font-mono text-xs text-text-muted">
+            states as of {new Date(data.fetchedAt).toISOString().slice(0, 10)} ·
+            fetched live from the GitHub search API · merged counts come from
+            the PRs&apos; merge timestamps, not vanity math
+          </p>
+        </div>
+      </animated.div>
+    </section>
+  );
+}

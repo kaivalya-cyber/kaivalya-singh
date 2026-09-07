@@ -1,26 +1,177 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
+/*
+ * ── Palette v2: "amber phosphor" ─────────────────────────────────────────
+ * Warm charcoal base (not GitHub-blue-black), amber CRT phosphor as the
+ * primary accent — a nod to old terminals, matched to the ASCII backdrop.
+ * Green/red survive only as diff semantics (add/remove), like real `git`
+ * output. Blue is neutralized to a warm slate so nothing fights the amber.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0e0d0b;
+  --bg-raised: #16140f;
+  --text-primary: #d8d2c4;
+  --text-muted: #8f887a;
+  --accent-add: #d29922; /* diff "+" — amber stays in the diff family */
+  --accent-remove: #f47067; /* diff "−" — desaturated coral, still reads */
+  --accent-link: #d8b478; /* links: pale amber, AA on --bg */
+  --border: #2a261e;
+  --ascii-warm: 1; /* sepia tint strength for the ASCII backdrop */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-accent-add: var(--accent-add);
+  --color-accent-remove: var(--accent-remove);
+  --color-accent-link: var(--accent-link);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fragment-mono);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  /* account for fixed header when jumping to #anchors */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* ── Amber selection — the site's accent, used where it counts ── */
+::selection {
+  background: rgba(210, 153, 34, 0.3);
+  color: #f5efe2;
+}
+
+/* ── Scrollbar styled as a vertical scroll-progress bar ── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #2c2820;
+  border: 2px solid var(--bg);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-add);
+}
+
+/* ── Film-grain overlay — warms the flat patches, unifies the video layer ── */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+}
+
+/* ── ASCII backdrop: the animated terminal behind the hero ────────────────
+ * Layers bottom-up inside .hero-ascii (position: relative):
+ *   1. the video (in DOM), tinted sepia + darkened via filter
+ *   2. .hero-ascii-tint   — flat page-color veils, strong at the edges so
+ *                           text always sits on solid ground
+ *   3. .hero-ascii-mask   — page-colored bottom fade (fade-out to content)
+ *   4. .hero-ascii-glow   — one amber CRT hotspot, radial so it never reads
+ *                           as an "AI gradient banner"
+ * Video keeps a static poster via `background-image` in case autoplay lags.
+ */
+.hero-ascii video {
+  /* Match the recipe's own warm tones, then pull it toward the page.
+     Bright enough that the glyphs read as texture, dim enough for copy. */
+  filter: sepia(var(--ascii-warm)) saturate(0.85) brightness(0.82)
+    contrast(1.12);
+}
+
+.hero-ascii-tint,
+.hero-ascii-mask,
+.hero-ascii-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.hero-ascii-tint {
+  /* Thin veils: anchor the edges, let the glyph field show through */
+  background:
+    linear-gradient(to right, rgba(14, 13, 11, 0.72) 0%, rgba(14, 13, 11, 0.2) 45%, rgba(14, 13, 11, 0.42) 100%),
+    linear-gradient(to bottom, rgba(14, 13, 11, 0.45) 0%, rgba(14, 13, 11, 0.08) 45%, rgba(14, 13, 11, 0.32) 100%);
+}
+
+.hero-ascii-mask {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 64%,
+    rgba(14, 13, 11, 0.7) 86%,
+    var(--bg) 100%
+  );
+}
+
+.hero-ascii-glow {
+  background: radial-gradient(
+    62% 55% at 30% 35%,
+    rgba(210, 153, 34, 0.2),
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+}
+
+/* CRT-bloom legibility: copy keeps its edge where bright glyphs pass under it */
+.hero-copy {
+  text-shadow:
+    0 1px 2px rgba(14, 13, 11, 0.9),
+    0 0 22px rgba(14, 13, 11, 0.65);
+}
+
+/* Motion-reduced users: kill the moving video entirely, keep the poster */
+@media (prefers-reduced-motion: reduce) {
+  .hero-ascii video {
+    display: none;
+  }
+  .hero-ascii {
+    background-image: url("https://assets.21st.dev/ascii-recipes/thumbnails/user_3I8QRgdp7zi7Xf4OJ7kQvS751Nn/92dbb983-c391-47d6-b9fe-fd341ce3a291.webp");
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* ── Focus ring pulses once so keyboard users can't miss it ── */
+:focus-visible {
+  outline: 2px solid var(--accent-link);
+  outline-offset: 2px;
+  animation: focus-pulse 0.45s ease-out 2;
+}
+@keyframes focus-pulse {
+  0% {
+    outline-offset: 6px;
+  }
+  100% {
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
