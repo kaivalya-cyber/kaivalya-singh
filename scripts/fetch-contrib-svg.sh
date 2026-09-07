@@ -28,4 +28,5 @@ SETTING_JSON="$ROOT/scripts/3d-contrib-settings.json" \
   node_modules/.bin/ts-node src/index.ts "$USERNAME"
 
 cp "$WORK/profile-3d-contrib/profile-amber.svg" "$ROOT/public/github-3d-contrib.svg"
+node "$ROOT/scripts/theme-contrib-svg.mjs" "$ROOT/public/github-3d-contrib.svg"
 echo "updated $ROOT/public/github-3d-contrib.svg"

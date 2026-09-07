@@ -4,75 +4,39 @@ import { animated, useSpring, useInView } from "@react-spring/web";
 import { githubContributions as data } from "@/content/github-contributions";
 import { usePrefersReducedMotion } from "@/lib/motion-preferences";
 
-const STATE_STYLES: Record<string, string> = {
-  merged: "text-accent-add",
-  open: "text-accent-link",
-  closed: "text-accent-remove",
-};
+/** Public, verifiable list of the user's PRs into a given upstream repo. */
+function prSearchUrl(repo: string): string {
+  return `https://github.com/search?q=author%3A${data.user}+type%3Apr+repo%3A${encodeURIComponent(repo)}&type=pullrequests`;
+}
 
-const STATE_GLYPH: Record<string, string> = {
-  merged: "●",
-  open: "○",
-  closed: "×",
-};
-
-function UpstreamPanel() {
-  const rows = data.upstream;
-
+/** Big, confident numbers: total PRs, merged shown only when it isn't zero. */
+function UpstreamStats() {
   return (
-    <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
-      {rows.map((repo) => (
-        <div key={repo.key} className="bg-bg-raised p-5">
-          <div className="flex items-baseline justify-between gap-3">
-            <a
-              href={repo.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-sm text-text-primary hover:text-accent-link"
-            >
-              {repo.label}
-            </a>
-            <p className="font-mono text-xs text-text-muted">
-              {repo.total} PRs
+    <div className="grid grid-cols-2 gap-px bg-border lg:grid-cols-1">
+      {data.upstream.map((repo) => (
+        <a
+          key={repo.key}
+          href={prSearchUrl(repo.repo)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex h-full flex-col justify-center bg-bg-raised px-5 py-4 transition-colors hover:bg-bg-raised/60"
+          aria-label={`${repo.total} pull requests to ${repo.label}${repo.merged > 0 ? `, ${repo.merged} merged` : ""}`}
+        >
+          <p className="font-mono text-[0.65rem] uppercase tracking-wide text-text-muted transition-colors group-hover:text-text-primary">
+            {repo.label}
+          </p>
+          <p className="mt-1 font-display text-4xl leading-none text-text-primary transition-colors group-hover:text-accent-add">
+            {repo.total}
+            <span className="ml-1.5 align-middle font-mono text-xs text-text-muted">
+              PRs
+            </span>
+          </p>
+          {repo.merged > 0 && (
+            <p className="mt-1.5 font-mono text-xs text-accent-add">
+              {repo.merged} merged
             </p>
-          </div>
-
-          <div
-            className="mt-3 flex gap-4 font-mono text-xs"
-            aria-label={`${repo.merged} merged, ${repo.open} open, ${repo.closedUnmerged} closed without merge`}
-          >
-            <span className="text-accent-add">{repo.merged} merged</span>
-            <span className="text-accent-link">{repo.open} open</span>
-            {repo.closedUnmerged > 0 && (
-              <span className="text-accent-remove">
-                {repo.closedUnmerged} closed
-              </span>
-            )}
-          </div>
-
-          <ul className="mt-4 space-y-2">
-            {repo.recent.map((pr) => (
-              <li key={pr.number} className="text-xs leading-snug">
-                <a
-                  href={pr.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex gap-2"
-                >
-                  <span
-                    className={`${STATE_STYLES[pr.state]} shrink-0`}
-                    aria-hidden
-                  >
-                    {STATE_GLYPH[pr.state]}
-                  </span>
-                  <span className="text-text-muted transition-colors group-hover:text-text-primary">
-                    #{pr.number} {pr.title}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+          )}
+        </a>
       ))}
     </div>
   );
@@ -93,44 +57,40 @@ export function ContributionsSection() {
     <section
       id="contributions"
       ref={inViewRef as React.Ref<HTMLElement>}
-      className="overflow-hidden bg-bg px-6 py-24 md:px-12"
+      className="overflow-hidden bg-bg px-6 py-16 md:px-12 md:py-20"
       aria-labelledby="contributions-heading"
     >
       <animated.div
         style={{ opacity: springs.opacity, transform: springs.y.to((y) => `translate3d(0, ${y}px, 0)`) }}
         className="mx-auto max-w-6xl"
       >
-        <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+          <div>
             <p className="font-mono text-xs uppercase text-accent-add">
               git shortlog
             </p>
             <h2
               id="contributions-heading"
-              className="mt-3 font-display text-3xl md:text-5xl"
+              className="mt-2 font-display text-2xl md:text-3xl"
             >
               A year of commits, in three dimensions.
             </h2>
-            <p className="mt-4 font-mono text-sm leading-relaxed text-text-muted">
-              The last 12 months of contributions, extruded into a commit
-              skyline — regenerated straight from GitHub, not hand-placed.
-            </p>
           </div>
 
-          <dl className="flex shrink-0 gap-8 font-mono">
+          <dl className="flex gap-6 font-mono text-sm">
             <div>
-              <dt className="text-xs uppercase text-text-muted">total</dt>
-              <dd className="mt-1 text-2xl text-accent-add">{total}</dd>
+              <dt className="text-[0.65rem] uppercase text-text-muted">total</dt>
+              <dd className="mt-0.5 text-xl text-accent-add">{total}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase text-text-muted">active days</dt>
-              <dd className="mt-1 text-2xl text-text-primary">{activeDays}</dd>
+              <dt className="text-[0.65rem] uppercase text-text-muted">active days</dt>
+              <dd className="mt-0.5 text-xl text-text-primary">{activeDays}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase text-text-muted">best day</dt>
-              <dd className="mt-1 text-2xl text-text-primary">
+              <dt className="text-[0.65rem] uppercase text-text-muted">best day</dt>
+              <dd className="mt-0.5 text-xl text-text-primary">
                 {bestDay?.count ?? 0}
-                <span className="ml-1 text-xs text-text-muted">
+                <span className="ml-1 text-[0.65rem] text-text-muted">
                   {bestDay?.date.slice(5)}
                 </span>
               </dd>
@@ -138,35 +98,38 @@ export function ContributionsSection() {
           </dl>
         </div>
 
-        <figure className="border border-border bg-bg-raised/40 p-2 md:p-4">
-          {/* Generated by yoshi389111/github-profile-3d-contrib with the
-              site's amber palette (scripts/3d-contrib-settings.json).
-              Refresh: npm run fetch:contrib-svg */}
-          {/* eslint-disable-next-line @next/next/no-img-element -- static SVG from /public; next/image adds nothing and requires dangerouslyAllowSVG */}
-          <img
-            src="/github-3d-contrib.svg"
-            alt={`3D isometric contribution calendar: ${total} contributions across ${activeDays} active days in the last 12 months`}
-            className="h-auto w-full"
-            loading="lazy"
-          />
-          <figcaption className="px-2 pb-1 pt-2 font-mono text-[0.65rem] text-text-muted">
-            generated with github-profile-3d-contrib · palette: amber phosphor
-            v2
-          </figcaption>
-        </figure>
+        {/* One panel: the commit skyline and the upstream numbers side by side. */}
+        <div className="grid gap-px border border-border bg-border lg:grid-cols-5">
+          <figure className="bg-bg-raised/40 p-2 lg:col-span-3 md:p-3">
+            {/* Generated by yoshi389111/github-profile-3d-contrib with the
+                site's amber palette (scripts/3d-contrib-settings.json),
+                language pie rethemed by scripts/theme-contrib-svg.mjs.
+                Refresh: npm run fetch:contrib-svg */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- static SVG from /public; next/image adds nothing and requires dangerouslyAllowSVG */}
+            <img
+              src="/github-3d-contrib.svg"
+              alt={`3D isometric contribution calendar: ${total} contributions across ${activeDays} active days in the last 12 months`}
+              className="h-auto w-full"
+              loading="lazy"
+            />
+            <figcaption className="px-1 pb-1 pt-2 font-mono text-[0.65rem] text-text-muted">
+              github-profile-3d-contrib · palette: amber phosphor v2
+            </figcaption>
+          </figure>
 
-        <div className="mt-12">
-          <p className="font-mono text-xs uppercase text-accent-add">
-            upstream — PRs into the frameworks I use
-          </p>
-          <div className="mt-5">
-            <UpstreamPanel />
+          <div className="flex flex-col bg-bg lg:col-span-2">
+            <p className="px-5 pt-5 font-mono text-xs uppercase text-accent-add">
+              upstream — PRs into the frameworks I use
+            </p>
+            <div className="flex-1 py-px">
+              <UpstreamStats />
+            </div>
+            <p className="px-5 pb-4 pt-3 font-mono text-[0.65rem] text-text-muted">
+              states as of{" "}
+              {new Date(data.fetchedAt).toISOString().slice(0, 10)} · live from
+              the GitHub search API
+            </p>
           </div>
-          <p className="mt-4 font-mono text-xs text-text-muted">
-            states as of {new Date(data.fetchedAt).toISOString().slice(0, 10)} ·
-            fetched live from the GitHub search API · merged counts come from
-            the PRs&apos; merge timestamps, not vanity math
-          </p>
         </div>
       </animated.div>
     </section>

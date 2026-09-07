@@ -21,8 +21,10 @@ jobs:
           USERNAME: kaivalya-cyber
           SETTING_JSON: scripts/3d-contrib-settings.json
 
-      - name: Move SVG into public/
-        run: cp profile-3d-contrib/profile-amber.svg public/github-3d-contrib.svg
+      - name: Move SVG into public/ & theme the language pie
+        run: |
+          cp profile-3d-contrib/profile-amber.svg public/github-3d-contrib.svg
+          node scripts/theme-contrib-svg.mjs public/github-3d-contrib.svg
 
       - name: Fetch upstream PR stats + calendar JSON
         env:
