@@ -1,14 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  domainLabels,
-  projects,
-  projectsByDomain,
-  type Project,
-} from "@/content/projects";
+import { domainLabels, projects, type Project } from "@/content/projects";
 import { DiffReveal } from "@/components/diff-reveal";
-import { ProjectLogEntry } from "@/components/project-log-entry";
+import { ProjectTimeline } from "@/components/project-timeline";
 import {
   CoverflowCarousel,
   type CoverflowSlide,
@@ -58,12 +53,6 @@ const featuredSlides: CoverflowSlide[] = featuredProjects.map((p) => ({
   src: COVERS[p.slug].src,
   alt: COVERS[p.slug].alt,
 }));
-
-interface DomainGroup {
-  domain: (typeof projectsByDomain)[number];
-  items: Project[];
-  startIndex: number;
-}
 
 /** Frequency-ordered stack vocabulary across the logged projects */
 function buildStackIndex(all: Project[]): string[] {
@@ -203,19 +192,6 @@ export function ProjectLog() {
     [query],
   );
 
-  const domainGroups: DomainGroup[] = useMemo(() => {
-    const groups: DomainGroup[] = [];
-    projectsByDomain.forEach((domain) => {
-      const items = filtered.filter((p) => p.domain === domain);
-      if (items.length === 0) return;
-      const prevEnd = groups.length > 0
-        ? groups[groups.length - 1].startIndex + groups[groups.length - 1].items.length
-        : 0;
-      groups.push({ domain, items, startIndex: prevEnd });
-    });
-    return groups;
-  }, [filtered]);
-
   const shown = filtered.length;
 
   return (
@@ -300,34 +276,14 @@ export function ProjectLog() {
           </div>
         </DiffReveal>
 
-        <div>
-          {domainGroups.map(({ domain, items, startIndex }) => (
-            <div key={domain} className="relative md:grid md:grid-cols-[10rem_1fr] md:gap-8">
-              <div className="top-8 h-max py-8 md:sticky">
-                <h3 className="font-mono text-xs uppercase text-text-muted">
-                  {domainLabels[domain]}
-                  <span className="ml-1.5 text-border" aria-hidden>
-                    {"//"}
-                  </span>
-                </h3>
-              </div>
-              <div className="border-t border-border">
-                {items.map((project, localIdx) => (
-                  <ProjectLogEntry
-                    key={project.slug}
-                    project={project}
-                    index={startIndex + localIdx}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-          {domainGroups.length === 0 && (
-            <p className="border border-border bg-bg-raised/40 px-4 py-6 font-mono text-sm text-text-muted">
-              no matches — try a broader stack term
-            </p>
-          )}
-        </div>
+        {/* snake timeline — appears and dissolves with the viewport */}
+        <ProjectTimeline projects={filtered} />
+
+        {filtered.length === 0 && (
+          <p className="border border-border bg-bg-raised/40 px-4 py-6 font-mono text-sm text-text-muted">
+            no matches — try a broader stack term
+          </p>
+        )}
       </div>
     </section>
   );
