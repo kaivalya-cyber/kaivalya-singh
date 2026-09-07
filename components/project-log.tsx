@@ -18,31 +18,36 @@ import {
  * Cover art per flagship — each SVG is drawn from the project's real data
  * (syndrome lattice, pendulum trace, swarm arena, autograd DAG, season bars).
  */
-const COVERS: Record<string, { src: string; alt: string; result: string }> = {
+const COVERS: Record<string, { src: string; alt: string; result: string; hue: string }> = {
   "variational-qec-decoder": {
     src: "/covers/qec-decoder.svg",
-    alt: "Syndrome lattice with detected errors routed to a variational decoder node",
+    alt: "Syndrome lattice with a bold logical-operator path and detected error cells",
     result: "LER ↓ 18.4% avg",
+    hue: "#A48FD8",
   },
   "reward-shaping-lsr": {
     src: "/covers/reward-shaping-lsr.svg",
-    alt: "Triple inverted pendulum balancing over its cart beside an LSR gauge at 0.515",
+    alt: "Triple inverted pendulum poster with an LSR gauge at 0.515",
     result: "LSR 0.515 · 97% of LQR",
+    hue: "#D29922",
   },
   "mappo-drone-swarm": {
     src: "/covers/mappo-drone-swarm.svg",
     alt: "Two teams of three drones converging on a shared objective in a hexagonal arena",
     result: "6 agents · CTDE",
+    hue: "#6FB5AD",
   },
   puregrad: {
     src: "/covers/puregrad.svg",
-    alt: "Autograd computation graph with forward arrows and a dashed backward gradient pass",
+    alt: "Autograd graph poster with forward pass and dashed backward gradient pass",
     result: "99.7% moons · 19/19 tests",
+    hue: "#F47067",
   },
   "ftc-analytics-dataset": {
     src: "/covers/ftc-analytics.svg",
     alt: "Six seasons of match data as rising bars with the best model accuracy marked",
     result: "AUC 0.9412 · 1,762 matches",
+    hue: "#A9B665",
   },
 };
 
@@ -78,13 +83,31 @@ function FeaturedWork() {
   const cover = COVERS[active.slug];
 
   return (
-    <div>
+    <div className="relative">
+      {/* Ambient wash — the page takes on the centered project's hue */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 -inset-x-6 md:-inset-x-12"
+      >
+        {featuredProjects.map((p, i) => (
+          <div
+            key={p.slug}
+            className="absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none"
+            style={{
+              opacity: i === activeIdx ? 1 : 0,
+              background: `radial-gradient(55% 42% at 50% 30%, ${COVERS[p.slug].hue}26 0%, transparent 72%), radial-gradient(140% 110% at 50% 0%, ${COVERS[p.slug].hue}14 0%, transparent 58%)`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative">
       <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
         <p className="font-mono text-xs">
           <span className="text-text-muted" aria-hidden="true">
             ${" "}
           </span>
-          <span className="text-accent-add">git log</span>
+          <span style={{ color: cover.hue }}>git log</span>
           <span className="text-text-muted"> --featured --oneline</span>
         </p>
         <p className="font-mono text-[0.65rem] text-text-muted">
@@ -107,7 +130,10 @@ function FeaturedWork() {
         key={active.slug}
         className="mx-auto mt-2 max-w-3xl animate-in fade-in slide-in-from-bottom-2 duration-500 border border-border bg-bg-raised/40 px-6 py-6 text-center"
       >
-        <p className="font-mono text-[0.65rem] uppercase tracking-wide text-accent-add">
+        <p
+          className="font-mono text-[0.65rem] uppercase tracking-wide"
+          style={{ color: cover.hue }}
+        >
           {domainLabels[active.domain]} · {cover.result}
         </p>
         <h3 className="mt-2 font-display text-xl md:text-2xl">{active.title}</h3>
@@ -151,6 +177,7 @@ function FeaturedWork() {
             </a>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
