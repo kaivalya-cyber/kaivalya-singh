@@ -26,6 +26,12 @@ const OUT = path.join(ROOT, "content", "github-contributions.json");
 
 const UA = { "User-Agent": "portfolio-data-fetch (github.com/kaivalya-cyber)" };
 
+// Optional auth — raised rate limits for the search API (CI sets GITHUB_TOKEN;
+// local runs fall back to unauthenticated, which is fine for this volume).
+const AUTH = process.env.GITHUB_TOKEN
+  ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+  : {};
+
 async function fetchText(url) {
   const res = await fetch(url, { headers: UA });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
@@ -33,7 +39,9 @@ async function fetchText(url) {
 }
 
 async function fetchJson(url) {
-  const res = await fetch(url, { headers: { ...UA, Accept: "application/vnd.github+json" } });
+  const res = await fetch(url, {
+    headers: { ...UA, ...AUTH, Accept: "application/vnd.github+json" },
+  });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
   return res.json();
 }

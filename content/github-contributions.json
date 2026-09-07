@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-07T04:47:20.085Z",
+  "fetchedAt": "2026-09-07T18:16:03.863Z",
   "calendar": {
     "days": [
       {
@@ -230,8 +230,8 @@
       },
       {
         "date": "2026-07-19",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 1
       },
       {
         "date": "2026-07-26",
@@ -265,8 +265,8 @@
       },
       {
         "date": "2026-09-06",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 1
       },
       {
         "date": "2025-09-08",
@@ -530,8 +530,8 @@
       },
       {
         "date": "2026-09-07",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 1
       },
       {
         "date": "2025-09-09",
@@ -1834,8 +1834,8 @@
         "count": 3
       }
     ],
-    "total": 719,
-    "activeDays": 85,
+    "total": 722,
+    "activeDays": 88,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1848,9 +1848,9 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 27,
-      "open": 8,
+      "open": 6,
       "merged": 5,
-      "closedUnmerged": 14,
+      "closedUnmerged": 16,
       "recent": [
         {
           "title": "Match NumPy isinf/isneginf/isposinf behavior for complex inputs",
@@ -1870,7 +1870,7 @@
           "title": "Raise error when np.average weights sum to zero",
           "url": "https://github.com/tensorflow/tensorflow/pull/126325",
           "number": 126325,
-          "state": "open",
+          "state": "closed",
           "date": "2026-08-28"
         },
         {

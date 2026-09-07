@@ -1,4 +1,4 @@
-name: Refresh 3D contribution graph
+name: Refresh contribution data
 
 on:
   schedule:
@@ -24,14 +24,19 @@ jobs:
       - name: Move SVG into public/
         run: cp profile-3d-contrib/profile-amber.svg public/github-3d-contrib.svg
 
+      - name: Fetch upstream PR stats + calendar JSON
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run fetch:github
+
       - name: Commit & push
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git add public/github-3d-contrib.svg
+          git add public/github-3d-contrib.svg content/github-contributions.json
           if git diff --cached --quiet; then
             echo "no changes"
           else
-            git commit -m "refresh 3d contribution graph"
+            git commit -m "refresh contribution data (3d graph + upstream pr stats)"
             git push
           fi
