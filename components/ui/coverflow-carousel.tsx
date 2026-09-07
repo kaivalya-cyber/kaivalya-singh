@@ -38,6 +38,8 @@ export interface CoverflowCarouselProps {
   showNavigation?: boolean;
   /** Names the carousel for assistive tech. */
   label?: string;
+  /** Accent color for pagination dots and nav arrows (any CSS color). */
+  accent?: string;
   className?: string;
   cardClassName?: string;
   /** Reports the centered slide index so the host can sync external UI. */
@@ -60,6 +62,7 @@ export function CoverflowCarousel({
   label = "Cover carousel",
   className,
   cardClassName,
+  accent,
   onSelect,
 }: CoverflowCarouselProps) {
   const count = slides.length;
@@ -258,7 +261,10 @@ export function CoverflowCarousel({
   return (
     <div
       className={cn("w-full", className)}
-      style={{ ["--cf-card" as string]: cardWidth }}
+      style={{
+        ["--cf-card" as string]: cardWidth,
+        ["--cf-accent" as string]: accent,
+      }}
       role="region"
       aria-roledescription="carousel"
       aria-label={label}
@@ -330,7 +336,10 @@ export function CoverflowCarousel({
               onClick={() => nudge(-1)}
               className="absolute left-3 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-background/70 p-2 text-foreground backdrop-blur transition hover:bg-background"
             >
-              <ChevronLeft className="size-5" />
+              <ChevronLeft
+                className="size-5"
+                style={{ color: "var(--cf-accent, var(--color-foreground))" }}
+              />
             </button>
             <button
               type="button"
@@ -338,7 +347,10 @@ export function CoverflowCarousel({
               onClick={() => nudge(1)}
               className="absolute right-3 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-background/70 p-2 text-foreground backdrop-blur transition hover:bg-background"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight
+                className="size-5"
+                style={{ color: "var(--cf-accent, var(--color-foreground))" }}
+              />
             </button>
           </>
         )}
@@ -379,8 +391,11 @@ export function CoverflowCarousel({
               aria-label={`Go to slide ${index + 1}`}
               aria-current={index === selected}
               onClick={() => goTo(index)}
+              style={{
+                backgroundColor: "var(--cf-accent, var(--color-foreground))",
+              }}
               className={cn(
-                "size-2 rounded-full bg-foreground transition-opacity",
+                "size-2 rounded-full transition-opacity",
                 index === selected ? "opacity-100" : "opacity-30",
               )}
             />

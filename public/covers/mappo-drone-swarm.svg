@@ -1,33 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Drone swarm arena poster in muted teal">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Teal poster: hexagonal arena with two drone teams">
   <rect width="600" height="600" fill="#14120D"/>
-  <rect x="20" y="20" width="560" height="560" fill="none" stroke="#26221A" stroke-width="1.5"/>
-  <text x="560" y="240" text-anchor="end" font-family="ui-monospace, monospace" font-size="260" font-weight="bold" fill="#1A1712">03</text>
+  <text x="628" y="252" text-anchor="end" font-family="ui-monospace, monospace" font-size="300" font-weight="bold" fill="none" stroke="#6FB5AD" stroke-opacity="0.22" stroke-width="2">03</text>
   <!-- arena -->
-  <polygon points="300,168 488,278 488,422 300,532 112,422 112,278" fill="none" stroke="#26221A" stroke-width="2.5"/>
-  <!-- objective -->
-  <rect x="283" y="333" width="34" height="34" transform="rotate(45 300 350)" fill="#14120D" stroke="#D8D2C4" stroke-width="3"/>
+  <polygon points="300,236 452,323 452,497 300,584 148,497 148,323" fill="#161F1C" stroke="#6FB5AD" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="300,290 405,350 405,470 300,530 195,470 195,350" fill="none" stroke="#26221A" stroke-width="3"/>
+  <!-- center objective -->
+  <rect x="283" y="373" width="34" height="34" transform="rotate(45 300 390)" fill="#D8D2C4"/>
   <!-- amber team -->
   <g fill="#D29922">
-    <polygon points="188,238 218,256 188,274"/>
-    <polygon points="236,186 266,204 236,222"/>
-    <polygon points="152,326 182,344 152,362"/>
+    <polygon points="212,296 244,314 212,332"/>
+    <polygon points="258,252 290,270 258,288"/>
+    <polygon points="176,388 208,406 176,424"/>
   </g>
-  <!-- teal team -->
-  <g fill="#6FB5AD">
-    <polygon points="412,286 442,304 412,322"/>
-    <polygon points="444,384 474,402 444,420"/>
-    <polygon points="368,436 398,454 368,472"/>
+  <!-- coral team -->
+  <g fill="#F47067">
+    <polygon points="388,318 420,336 388,354"/>
+    <polygon points="416,412 448,430 416,448"/>
+    <polygon points="344,452 376,470 344,488"/>
   </g>
-  <!-- convergence paths -->
-  <path d="M 202 262 C 250 310 275 330 296 344" fill="none" stroke="#D29922" stroke-width="2" stroke-dasharray="6 7"/>
-  <path d="M 250 208 C 268 272 284 324 296 346" fill="none" stroke="#D29922" stroke-width="2" stroke-dasharray="6 7"/>
-  <path d="M 166 350 C 212 358 256 360 288 360" fill="none" stroke="#D29922" stroke-width="2" stroke-dasharray="6 7"/>
-  <path d="M 398 310 C 356 330 328 344 306 352" fill="none" stroke="#6FB5AD" stroke-width="2" stroke-dasharray="6 7"/>
-  <path d="M 432 406 C 380 392 336 372 308 360" fill="none" stroke="#6FB5AD" stroke-width="2" stroke-dasharray="6 7"/>
-  <path d="M 380 456 C 348 420 320 388 302 366" fill="none" stroke="#6FB5AD" stroke-width="2" stroke-dasharray="6 7"/>
-  <!-- callout -->
-  <text x="56" y="96" font-family="ui-monospace, monospace" font-size="34" font-weight="bold" fill="#6FB5AD">3 v 3</text>
-  <text x="56" y="124" font-family="ui-monospace, monospace" font-size="14" fill="#8F887A">cooperative-competitive · CTDE · roles emerge</text>
-  <!-- caption -->
-  <text x="56" y="580" font-family="ui-monospace, monospace" font-size="15" fill="#8F887A">fig. 03 — MAPPO drone swarm</text>
+  <!-- convergence -->
+  <path d="M 226 322 C 260 352 280 370 296 384" fill="none" stroke="#D29922" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M 272 282 C 286 330 294 366 298 388" fill="none" stroke="#D29922" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M 192 412 C 234 414 268 408 292 400" fill="none" stroke="#D29922" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M 374 344 C 348 360 326 376 308 386" fill="none" stroke="#F47067" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M 404 426 C 364 414 328 402 306 394" fill="none" stroke="#F47067" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M 356 466 C 332 440 312 414 300 398" fill="none" stroke="#F47067" stroke-width="3" stroke-dasharray="9 9"/>
+  <!-- type -->
+  <text x="56" y="88" font-family="ui-monospace, monospace" font-size="13" letter-spacing="4" fill="#8F887A">FIG. 03 — MAPPO SWARM</text>
+  <text x="56" y="182" font-family="ui-monospace, monospace" font-size="104" font-weight="bold" fill="#6FB5AD">3 v 3</text>
+  <text x="56" y="216" font-family="ui-monospace, monospace" font-size="17" letter-spacing="3" fill="#D8D2C4">COOPERATIVE-COMPETITIVE · CTDE</text>
+  <text x="56" y="248" font-family="ui-monospace, monospace" font-size="13" fill="#8F887A">PYBULLET · EMERGENT ROLES, NOT ASSIGNED</text>
 </svg>

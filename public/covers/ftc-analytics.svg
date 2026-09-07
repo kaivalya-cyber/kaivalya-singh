@@ -1,31 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Season bars poster in sage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Sage poster: color-blocked season bars bleeding off the baseline">
   <rect width="600" height="600" fill="#14120D"/>
-  <rect x="20" y="20" width="560" height="560" fill="none" stroke="#26221A" stroke-width="1.5"/>
-  <text x="560" y="240" text-anchor="end" font-family="ui-monospace, monospace" font-size="260" font-weight="bold" fill="#1A1712">05</text>
+  <text x="628" y="252" text-anchor="end" font-family="ui-monospace, monospace" font-size="300" font-weight="bold" fill="none" stroke="#A9B665" stroke-opacity="0.22" stroke-width="2">05</text>
   <!-- accuracy guide -->
-  <line x1="88" y1="236" x2="536" y2="236" stroke="#D8B478" stroke-width="1.5" stroke-dasharray="5 7"/>
-  <text x="536" y="226" text-anchor="end" font-family="ui-monospace, monospace" font-size="14" fill="#D8B478">AUC 0.9412</text>
-  <!-- bars -->
-  <rect x="104" y="384" width="56" height="76"  fill="#26221A"/>
-  <rect x="180" y="336" width="56" height="124" fill="#26221A"/>
-  <rect x="256" y="288" width="56" height="172" fill="#26221A"/>
-  <rect x="332" y="236" width="56" height="224" fill="#A9B665"/>
-  <rect x="408" y="200" width="56" height="260" fill="#26221A" stroke="#A9B665" stroke-width="2"/>
-  <rect x="484" y="156" width="56" height="304" fill="#26221A"/>
-  <!-- season labels -->
-  <g font-family="ui-monospace, monospace" font-size="14" fill="#8F887A" text-anchor="middle">
-    <text x="132" y="492">s1</text>
-    <text x="208" y="492">s2</text>
-    <text x="284" y="492">s3</text>
-    <text x="360" y="492">s4</text>
-    <text x="436" y="492">s5</text>
-    <text x="512" y="492">s6</text>
-  </g>
-  <line x1="88" y1="460" x2="536" y2="460" stroke="#26221A" stroke-width="3"/>
-  <!-- callout -->
-  <text x="56" y="96" font-family="ui-monospace, monospace" font-size="34" font-weight="bold" fill="#A9B665">1,762</text>
-  <text x="176" y="96" font-family="ui-monospace, monospace" font-size="18" fill="#8F887A">matches</text>
-  <text x="56" y="124" font-family="ui-monospace, monospace" font-size="14" fill="#8F887A">6 seasons · 902 teams · OPR / ELO · 88.69% best model</text>
-  <!-- caption -->
-  <text x="56" y="556" font-family="ui-monospace, monospace" font-size="15" fill="#8F887A">fig. 05 — open analytics dataset + dashboard</text>
+  <line x1="0" y1="288" x2="600" y2="288" stroke="#D8B478" stroke-width="2" stroke-dasharray="6 8"/>
+  <text x="568" y="276" text-anchor="end" font-family="ui-monospace, monospace" font-size="15" letter-spacing="2" fill="#D8B478">AUC 0.9412</text>
+  <!-- season bars, bleeding off the bottom edge -->
+  <rect x="40"  y="400" width="78" height="200" fill="#26221A"/>
+  <rect x="134" y="316" width="78" height="284" fill="#3C4426"/>
+  <rect x="228" y="230" width="78" height="370" fill="#55613A"/>
+  <rect x="322" y="140" width="78" height="460" fill="#A9B665"/>
+  <rect x="416" y="252" width="78" height="348" fill="#55613A"/>
+  <rect x="510" y="336" width="78" height="264" fill="#3C4426"/>
+  <!-- type -->
+  <text x="56" y="88" font-family="ui-monospace, monospace" font-size="13" letter-spacing="4" fill="#8F887A">FIG. 05 — FTC ANALYTICS</text>
+  <text x="56" y="182" font-family="ui-monospace, monospace" font-size="96" font-weight="bold" fill="#A9B665">1,762</text>
+  <text x="56" y="216" font-family="ui-monospace, monospace" font-size="17" letter-spacing="3" fill="#D8D2C4">MATCHES · 6 SEASONS · 902 TEAMS</text>
+  <text x="56" y="248" font-family="ui-monospace, monospace" font-size="13" fill="#8F887A">OPR / NP-OPR / CCWM / ELO · 88.69% BEST MODEL</text>
 </svg>

@@ -95,7 +95,7 @@ function FeaturedWork() {
             className="absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none"
             style={{
               opacity: i === activeIdx ? 1 : 0,
-              background: `radial-gradient(55% 42% at 50% 30%, ${COVERS[p.slug].hue}26 0%, transparent 72%), radial-gradient(140% 110% at 50% 0%, ${COVERS[p.slug].hue}14 0%, transparent 58%)`,
+              background: `radial-gradient(55% 42% at 50% 30%, ${COVERS[p.slug].hue}3D 0%, transparent 74%), radial-gradient(140% 110% at 50% 0%, ${COVERS[p.slug].hue}1F 0%, transparent 60%), linear-gradient(to top, ${COVERS[p.slug].hue}1A 0%, transparent 36%)`,
             }}
           />
         ))}
@@ -120,6 +120,7 @@ function FeaturedWork() {
         cardWidth="clamp(210px, 26vw, 330px)"
         showNavigation
         showPagination
+        accent={cover.hue}
         onSelect={setActiveIdx}
         label="Featured projects"
         cardClassName="border border-border"
@@ -128,7 +129,8 @@ function FeaturedWork() {
       {/* Detail card for whichever flagship is centered */}
       <div
         key={active.slug}
-        className="mx-auto mt-2 max-w-3xl animate-in fade-in slide-in-from-bottom-2 duration-500 border border-border bg-bg-raised/40 px-6 py-6 text-center"
+        style={{ borderColor: `${cover.hue}50` }}
+        className="mx-auto mt-2 max-w-3xl animate-in fade-in slide-in-from-bottom-2 duration-500 border bg-bg-raised/40 px-6 py-6 text-center"
       >
         <p
           className="font-mono text-[0.65rem] uppercase tracking-wide"
@@ -149,7 +151,10 @@ function FeaturedWork() {
                 title={m.label + (m.context ? ` (${m.context})` : "")}
                 className="border border-border px-2.5 py-1 font-mono text-xs"
               >
-                <span className="text-text-primary">
+                <span
+                  style={{ color: cover.hue }}
+                  className="font-medium"
+                >
                   {m.value}
                   {m.suffix ?? ""}
                 </span>{" "}
