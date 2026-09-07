@@ -19,14 +19,19 @@ const DOMAIN_HUES: Record<ProjectDomain, string> = {
 
 /**
  * One entry on the snake timeline. Appears when it scrolls into view and
- * dissolves when it leaves — both directions, no `once`.
+ * dissolves when it leaves — both directions, no `once`. The node on the
+ * spine is a button that toggles the domain filter.
  */
 function TimelineEntry({
   project,
   index,
+  activeDomain,
+  onToggleDomain,
 }: {
   project: Project;
   index: number;
+  activeDomain: ProjectDomain | null;
+  onToggleDomain: (domain: ProjectDomain) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -52,15 +57,33 @@ function TimelineEntry({
       ref={ref}
       className="relative py-6 md:grid md:grid-cols-[1fr_5rem_1fr] md:py-10"
     >
-      {/* node on the line */}
-      <div className="absolute left-4 top-8 md:left-1/2 md:top-10 md:-translate-x-1/2">
-        <span
-          className="block size-3.5 rounded-full border-2 bg-bg transition-all duration-700"
-          style={{
-            borderColor: hue,
-            boxShadow: visible ? `0 0 14px ${hue}90` : "none",
-          }}
-        />
+      {/* node on the line — click to filter the snake by this domain */}
+      <div className="absolute left-4 top-8 z-10 md:left-1/2 md:top-10 md:-translate-x-1/2">
+        <button
+          type="button"
+          aria-pressed={activeDomain === project.domain}
+          aria-label={`${
+            activeDomain === project.domain ? "Clear" : "Filter timeline by"
+          } ${domainLabels[project.domain]} projects`}
+          title={`filter by ${domainLabels[project.domain]}`}
+          onClick={() => onToggleDomain(project.domain)}
+          className="-m-2 grid size-8 cursor-pointer place-items-center rounded-full outline-none transition-transform hover:scale-125 focus-visible:ring-2 focus-visible:ring-accent-link motion-reduce:transition-none"
+        >
+          <span
+            className="block size-3.5 rounded-full border-2 bg-bg transition-all duration-700 motion-reduce:transition-none"
+            style={{
+              borderColor: hue,
+              backgroundColor:
+                activeDomain === project.domain ? hue : undefined,
+              boxShadow:
+                activeDomain === project.domain
+                  ? `0 0 18px ${hue}`
+                  : visible
+                    ? `0 0 14px ${hue}90`
+                    : "none",
+            }}
+          />
+        </button>
       </div>
 
       {/* card — left, right, or full width on mobile */}
@@ -140,6 +163,15 @@ function TimelineEntry({
 export function ProjectTimeline({ projects }: { projects: Project[] }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
+  const [domain, setDomain] = useState<ProjectDomain | null>(null);
+
+  const toggleDomain = (next: ProjectDomain) =>
+    setDomain((current) => (current === next ? null : next));
+
+  /** Domain filter composes with the stack filter passed in from above. */
+  const shown = domain
+    ? projects.filter((p) => p.domain === domain)
+    : projects;
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -171,6 +203,33 @@ export function ProjectTimeline({ projects }: { projects: Project[] }) {
 
   return (
     <div ref={wrapRef} className="relative">
+      {/* grep-style status row for the domain filter */}
+      <div className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 pl-10 font-mono text-xs md:pl-0" aria-live="polite">
+        <span className="select-none text-text-muted" aria-hidden="true">
+          $ timeline
+        </span>
+        <span className="text-accent-add">
+          {domain ? `--domain ${domainLabels[domain].toLowerCase()}` : "--all"}
+        </span>
+        {domain && (
+          <>
+            <span className="text-text-muted">
+              → {shown.length} entr{shown.length === 1 ? "y" : "ies"}
+            </span>
+            <button
+              type="button"
+              onClick={() => setDomain(null)}
+              className="ml-1 rounded border border-border px-1.5 py-0.5 text-text-muted transition-colors hover:border-accent-remove hover:text-accent-remove"
+            >
+              clear ✕
+            </button>
+          </>
+        )}
+        {!domain && (
+          <span className="text-text-muted/70">· click a node to filter by domain</span>
+        )}
+      </div>
+
       {/* the snake's spine: base rail + scroll-charged fill */}
       <div
         aria-hidden="true"
@@ -184,8 +243,14 @@ export function ProjectTimeline({ projects }: { projects: Project[] }) {
       />
 
       <div>
-        {projects.map((project, i) => (
-          <TimelineEntry key={project.slug} project={project} index={i} />
+        {shown.map((project, i) => (
+          <TimelineEntry
+            key={project.slug}
+            project={project}
+            index={i}
+            activeDomain={domain}
+            onToggleDomain={toggleDomain}
+          />
         ))}
       </div>
     </div>
