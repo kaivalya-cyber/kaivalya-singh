@@ -69,6 +69,8 @@ export function CoverflowCarousel({
 
   const frameRef = React.useRef<HTMLDivElement>(null);
   const cardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+  /** Glow rims — one per card, faded by centeredness in `paint`. */
+  const rimRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   /** Fractional card index at the centre. The single source of truth. */
   const posRef = React.useRef(0);
   /** Where the current settle is headed. Stepping off `pos` instead would
@@ -133,6 +135,16 @@ export function CoverflowCarousel({
       const edge = loop ? Math.min(1, Math.max(0, count / 2 - distance)) : 1;
       card.style.opacity = String(Math.max(0, 1 - fade * distance) * edge);
       card.style.zIndex = String(100 - Math.round(distance));
+
+      // The glowing rim lives only on the focused record. It fades out over
+      // roughly the first half-step away from centre, so the neighbours stay
+      // clean while the centre card visibly pops.
+      const rim = rimRefs.current[index];
+      if (rim) {
+        rim.style.opacity = String(
+          Math.max(0, 1 - distance * 1.75) * edge,
+        );
+      }
     });
   }, [count, depth, fade, falloff, gap, loop, rotate]);
 
@@ -311,17 +323,33 @@ export function CoverflowCarousel({
                 aria-roledescription="slide"
                 aria-label={`${index + 1} of ${count}`}
                 className={cn(
-                  "absolute left-1/2 top-0 aspect-square overflow-hidden rounded-2xl bg-muted shadow-xl will-change-transform",
+                  "absolute left-1/2 top-0 aspect-square rounded-2xl bg-muted shadow-xl will-change-transform",
                   cardClassName,
                 )}
                 style={{ width: "var(--cf-card)" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  draggable={false}
-                  className="h-full w-full select-none object-cover"
+                <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    draggable={false}
+                    className="h-full w-full select-none object-cover"
+                  />
+                </div>
+                {/* glowing rim on the centered record — unclipped so the
+                    outer glow can bleed past the card edge */}
+                <div
+                  ref={(node) => {
+                    rimRefs.current[index] = node;
+                  }}
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 rounded-2xl"
+                  style={{
+                    boxShadow:
+                      "0 0 0 2px var(--cf-accent, var(--color-foreground)), 0 0 28px color-mix(in srgb, var(--cf-accent, var(--color-foreground)) 55%, transparent), 0 0 64px color-mix(in srgb, var(--cf-accent, var(--color-foreground)) 28%, transparent)",
+                    opacity: 0,
+                  }}
                 />
               </div>
             ))}
