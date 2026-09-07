@@ -49,7 +49,7 @@ export const site = {
     ],
   },
   heroThesis:
-    "I build learning systems that survive contact with physics — variational quantum decoders, multi-agent drone swarms, and a control-stability metric (LSR) now heading toward arXiv.",
+    "I build learning systems that survive contact with physics — variational quantum decoders, multi-agent drone swarms, and a control-stability metric (LSR).",
   /** One-line entries for the hero diff card — + additions, ~ context, from CV_hs */
   diffLines: [
     { op: "add", text: "rewards that close 97% of the gap to LQR-optimal" },
