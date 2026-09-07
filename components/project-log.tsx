@@ -9,6 +9,50 @@ import {
 } from "@/content/projects";
 import { DiffReveal } from "@/components/diff-reveal";
 import { ProjectLogEntry } from "@/components/project-log-entry";
+import {
+  CoverflowCarousel,
+  type CoverflowSlide,
+} from "@/components/ui/coverflow-carousel";
+
+/**
+ * Cover art per flagship — each SVG is drawn from the project's real data
+ * (syndrome lattice, pendulum trace, swarm arena, autograd DAG, season bars).
+ */
+const COVERS: Record<string, { src: string; alt: string; result: string }> = {
+  "variational-qec-decoder": {
+    src: "/covers/qec-decoder.svg",
+    alt: "Syndrome lattice with detected errors routed to a variational decoder node",
+    result: "LER ↓ 18.4% avg",
+  },
+  "reward-shaping-lsr": {
+    src: "/covers/reward-shaping-lsr.svg",
+    alt: "Triple inverted pendulum balancing over its cart beside an LSR gauge at 0.515",
+    result: "LSR 0.515 · 97% of LQR",
+  },
+  "mappo-drone-swarm": {
+    src: "/covers/mappo-drone-swarm.svg",
+    alt: "Two teams of three drones converging on a shared objective in a hexagonal arena",
+    result: "6 agents · CTDE",
+  },
+  puregrad: {
+    src: "/covers/puregrad.svg",
+    alt: "Autograd computation graph with forward arrows and a dashed backward gradient pass",
+    result: "99.7% moons · 19/19 tests",
+  },
+  "ftc-analytics-dataset": {
+    src: "/covers/ftc-analytics.svg",
+    alt: "Six seasons of match data as rising bars with the best model accuracy marked",
+    result: "AUC 0.9412 · 1,762 matches",
+  },
+};
+
+const featuredProjects = projects.filter((p) => p.flagship && COVERS[p.slug]);
+const logProjects = projects.filter((p) => !(p.flagship && COVERS[p.slug]));
+
+const featuredSlides: CoverflowSlide[] = featuredProjects.map((p) => ({
+  src: COVERS[p.slug].src,
+  alt: COVERS[p.slug].alt,
+}));
 
 interface DomainGroup {
   domain: (typeof projectsByDomain)[number];
@@ -16,7 +60,7 @@ interface DomainGroup {
   startIndex: number;
 }
 
-/** Frequency-ordered stack vocabulary across all projects */
+/** Frequency-ordered stack vocabulary across the logged projects */
 function buildStackIndex(all: Project[]): string[] {
   const counts = new Map<string, number>();
   for (const p of all) {
@@ -28,18 +72,102 @@ function buildStackIndex(all: Project[]): string[] {
     .slice(0, 14);
 }
 
+function FeaturedWork() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = featuredProjects[activeIdx] ?? featuredProjects[0];
+  const cover = COVERS[active.slug];
+
+  return (
+    <div>
+      <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
+        <p className="font-mono text-xs">
+          <span className="text-text-muted" aria-hidden="true">
+            ${" "}
+          </span>
+          <span className="text-accent-add">git log</span>
+          <span className="text-text-muted"> --featured --oneline</span>
+        </p>
+        <p className="font-mono text-[0.65rem] text-text-muted">
+          drag · arrow keys · click a dot
+        </p>
+      </div>
+
+      <CoverflowCarousel
+        slides={featuredSlides}
+        cardWidth="clamp(210px, 26vw, 330px)"
+        showNavigation
+        showPagination
+        onSelect={setActiveIdx}
+        label="Featured projects"
+        cardClassName="border border-border"
+      />
+
+      {/* Detail card for whichever flagship is centered */}
+      <div
+        key={active.slug}
+        className="mx-auto mt-2 max-w-3xl animate-in fade-in slide-in-from-bottom-2 duration-500 border border-border bg-bg-raised/40 px-6 py-6 text-center"
+      >
+        <p className="font-mono text-[0.65rem] uppercase tracking-wide text-accent-add">
+          {domainLabels[active.domain]} · {cover.result}
+        </p>
+        <h3 className="mt-2 font-display text-xl md:text-2xl">{active.title}</h3>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-text-muted">
+          {active.summary}
+        </p>
+
+        {active.metrics && active.metrics.length > 0 && (
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {active.metrics.slice(0, 4).map((m) => (
+              <span
+                key={m.label}
+                title={m.label + (m.context ? ` (${m.context})` : "")}
+                className="border border-border px-2.5 py-1 font-mono text-xs"
+              >
+                <span className="text-text-primary">
+                  {m.value}
+                  {m.suffix ?? ""}
+                </span>{" "}
+                <span className="text-text-muted">{m.label}</span>
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-xs">
+          <a
+            href={`/projects/${active.slug}`}
+            className="text-accent-link transition-colors hover:text-text-primary"
+          >
+            read the writeup →
+          </a>
+          {active.githubUrl && (
+            <a
+              href={active.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-muted transition-colors hover:text-text-primary"
+            >
+              source ↗
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectLog() {
   const [query, setQuery] = useState<string | null>(null);
 
-  const stackOptions = useMemo(() => buildStackIndex(projects), []);
+  const stackOptions = useMemo(() => buildStackIndex(logProjects), []);
 
   const filtered = useMemo(
     () =>
       query
-        ? projects.filter((p) =>
+        ? logProjects.filter((p) =>
             p.stack.some((s) => s.toLowerCase() === query.toLowerCase()),
           )
-        : projects,
+        : logProjects,
     [query],
   );
 
@@ -62,7 +190,7 @@ export function ProjectLog() {
     <section id="project-log" className="bg-bg px-6 py-24 md:px-12" aria-labelledby="project-log-heading">
       <div className="mx-auto max-w-6xl">
         <DiffReveal>
-          <div className="mb-8 max-w-3xl">
+          <div className="mb-10 max-w-3xl">
             <p className="font-mono text-xs uppercase text-accent-add">
               Project Log
             </p>
@@ -70,11 +198,24 @@ export function ProjectLog() {
               Separate pieces of work, each with a stable trace.
             </h2>
             <p className="mt-5 text-text-muted">
-              Flagship work opens into dedicated writeups; smaller projects stay
-              compact so the signal does not get diluted.
+              Five flagships front the section as covers; the full history runs
+              below, grouped by domain.
             </p>
           </div>
         </DiffReveal>
+
+        {/* Featured flagship work */}
+        <DiffReveal>
+          <FeaturedWork />
+        </DiffReveal>
+
+        {/* Divider into the full history */}
+        <div className="relative my-16" aria-hidden="true">
+          <div className="border-t border-dashed border-border" />
+          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-bg px-4 font-mono text-[0.65rem] uppercase tracking-wide text-text-muted">
+            full log — {logProjects.length} entries
+          </span>
+        </div>
 
         {/* grep-style stack filter */}
         <DiffReveal>

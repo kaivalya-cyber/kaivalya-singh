@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Six seasons of match data as rising bars with the best model marked">
+  <rect width="600" height="600" fill="#14120D"/>
+  <!-- headline -->
+  <text x="56" y="84" font-family="ui-monospace, monospace" font-size="22" fill="#D8D2C4">6 seasons · 1,762 matches</text>
+  <text x="56" y="110" font-family="ui-monospace, monospace" font-size="14" fill="#8F887A">902 teams · OPR / NP-OPR / CCWM / ELO</text>
+  <!-- accuracy guide line -->
+  <line x1="90" y1="240" x2="540" y2="240" stroke="#D8B478" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <text x="540" y="230" text-anchor="end" font-family="ui-monospace, monospace" font-size="13" fill="#D8B478">best model 88.69% · AUC 0.9412</text>
+  <!-- season bars -->
+  <g>
+    <rect x="110" y="380" width="48" height="80"  fill="#2A261E"/>
+    <rect x="178" y="340" width="48" height="120" fill="#2A261E"/>
+    <rect x="246" y="300" width="48" height="160" fill="#2A261E"/>
+    <rect x="314" y="260" width="48" height="200" fill="#2A261E"/>
+    <rect x="382" y="212" width="48" height="248" fill="#D29922"/>
+    <rect x="450" y="170" width="48" height="290" fill="#2A261E" stroke="#D29922" stroke-width="1.5"/>
+  </g>
+  <!-- season labels -->
+  <g font-family="ui-monospace, monospace" font-size="12" fill="#8F887A" text-anchor="middle">
+    <text x="134" y="480">s1</text>
+    <text x="202" y="480">s2</text>
+    <text x="270" y="480">s3</text>
+    <text x="338" y="480">s4</text>
+    <text x="406" y="480">s5</text>
+    <text x="474" y="480">s6</text>
+  </g>
+  <!-- baseline -->
+  <line x1="90" y1="460" x2="540" y2="460" stroke="#2A261E" stroke-width="3"/>
+  <!-- caption -->
+  <text x="56" y="556" font-family="ui-monospace, monospace" font-size="15" fill="#8F887A">fig. 05 — public dataset · ML benchmarks · 20+ page dashboard</text>
+</svg>

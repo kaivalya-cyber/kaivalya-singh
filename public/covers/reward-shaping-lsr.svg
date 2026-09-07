@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Triple inverted pendulum balancing above its cart, with an LSR gauge">
+  <rect width="600" height="600" fill="#14120D"/>
+  <!-- headline -->
+  <text x="56" y="84" font-family="ui-monospace, monospace" font-size="22" fill="#D8D2C4">LSR 0.515 ± 0.016</text>
+  <text x="56" y="110" font-family="ui-monospace, monospace" font-size="14" fill="#8F887A">97% of the gap to LQR-optimal, closed</text>
+  <!-- swing trace -->
+  <path d="M 300 448 Q 180 300 260 150" fill="none" stroke="#2A261E" stroke-width="2" stroke-dasharray="3 7"/>
+  <path d="M 300 448 Q 420 290 330 140" fill="none" stroke="#2A261E" stroke-width="2" stroke-dasharray="3 7"/>
+  <!-- rail + cart -->
+  <line x1="60" y1="480" x2="540" y2="480" stroke="#2A261E" stroke-width="3"/>
+  <rect x="240" y="448" width="120" height="32" fill="#16140F" stroke="#8F887A" stroke-width="2"/>
+  <circle cx="266" cy="486" r="8" fill="#14120D" stroke="#8F887A" stroke-width="2"/>
+  <circle cx="334" cy="486" r="8" fill="#14120D" stroke="#8F887A" stroke-width="2"/>
+  <!-- three links -->
+  <line x1="300" y1="448" x2="376" y2="342" stroke="#D29922" stroke-width="7" stroke-linecap="round"/>
+  <line x1="376" y1="342" x2="318" y2="228" stroke="#D29922" stroke-width="7" stroke-linecap="round"/>
+  <line x1="318" y1="228" x2="376" y2="122" stroke="#D29922" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="300" cy="448" r="9" fill="#16140F" stroke="#D8B478" stroke-width="2.5"/>
+  <circle cx="376" cy="342" r="9" fill="#16140F" stroke="#D8B478" stroke-width="2.5"/>
+  <circle cx="318" cy="228" r="9" fill="#16140F" stroke="#D8B478" stroke-width="2.5"/>
+  <circle cx="376" cy="122" r="11" fill="#F47067"/>
+  <!-- LSR gauge -->
+  <rect x="500" y="150" width="14" height="310" fill="none" stroke="#2A261E" stroke-width="2"/>
+  <rect x="500" y="310" width="14" height="150" fill="#D29922"/>
+  <line x1="492" y1="310" x2="522" y2="310" stroke="#D8D2C4" stroke-width="2"/>
+  <text x="522" y="304" text-anchor="end" font-family="ui-monospace, monospace" font-size="13" fill="#D8D2C4">0.515</text>
+  <text x="522" y="478" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" fill="#8F887A">0</text>
+  <!-- Euler vs RK4 note -->
+  <text x="56" y="150" font-family="ui-monospace, monospace" font-size="13" fill="#F47067">Euler→RK4: variance ↓ 845×</text>
+  <!-- caption -->
+  <text x="56" y="556" font-family="ui-monospace, monospace" font-size="15" fill="#8F887A">fig. 02 — energy-shaped reward · degree-5 underactuated</text>
+</svg>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @config "../tailwind.config.ts";
 
 /*
@@ -29,6 +30,12 @@
   --color-accent-remove: var(--accent-remove);
   --color-accent-link: var(--accent-link);
   --color-border: var(--border);
+  /* shadcn-style semantic aliases — used by components/ui (coverflow) */
+  --color-background: var(--bg);
+  --color-foreground: var(--text-primary);
+  --color-muted: var(--bg-raised);
+  --color-muted-foreground: var(--text-muted);
+  --color-ring: var(--accent-link);
   --font-sans: var(--font-inter);
   --font-display: var(--font-fragment-mono);
   --font-mono: var(--font-jetbrains-mono);

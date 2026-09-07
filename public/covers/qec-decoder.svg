@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Syndrome lattice routed to a variational decoder">
+  <defs>
+    <pattern id="lat" width="52" height="52" patternUnits="userSpaceOnUse">
+      <rect x="1" y="1" width="30" height="30" fill="none" stroke="#2A261E" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="600" fill="#14120D"/>
+  <!-- headline stat -->
+  <text x="56" y="84" font-family="ui-monospace, monospace" font-size="22" fill="#D8D2C4">LER ↓ 18.4% avg · 27.2% peak</text>
+  <text x="56" y="110" font-family="ui-monospace, monospace" font-size="14" fill="#8F887A">classifier acc 94.2% · overhead 3.8%</text>
+  <!-- syndrome lattice -->
+  <rect x="56" y="150" width="364" height="364" fill="url(#lat)"/>
+  <!-- detected syndromes -->
+  <rect x="161" y="254" width="30" height="30" fill="#D29922"/>
+  <rect x="265" y="202" width="30" height="30" fill="#F47067"/>
+  <rect x="317" y="306" width="30" height="30" fill="#D29922"/>
+  <rect x="213" y="358" width="30" height="30" fill="#8F887A"/>
+  <!-- routing paths to decoder -->
+  <path d="M 191 269 C 300 269 380 280 462 300" fill="none" stroke="#D29922" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M 295 217 C 370 230 430 260 462 292" fill="none" stroke="#F47067" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M 347 321 C 390 315 430 308 460 306" fill="none" stroke="#D29922" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M 243 373 C 320 373 420 340 462 312" fill="none" stroke="#8F887A" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <!-- decoder node -->
+  <circle cx="496" cy="301" r="34" fill="#16140F" stroke="#D8B478" stroke-width="2.5"/>
+  <text x="496" y="297" text-anchor="middle" font-family="ui-monospace, monospace" font-size="15" fill="#D8B478">var</text>
+  <text x="496" y="313" text-anchor="middle" font-family="ui-monospace, monospace" font-size="12" fill="#8F887A">decode</text>
+  <!-- caption -->
+  <text x="56" y="556" font-family="ui-monospace, monospace" font-size="15" fill="#8F887A">fig. 01 — syndrome classification → specialized decoders</text>
+</svg>
