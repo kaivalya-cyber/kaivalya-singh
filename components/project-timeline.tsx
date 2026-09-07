@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   domainLabels,
   type Project,
@@ -17,10 +23,15 @@ const DOMAIN_HUES: Record<ProjectDomain, string> = {
   web: "#D8B478",
 };
 
+/** SSR-safe layout effect (same shim the coverflow uses). */
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 /**
  * One entry on the snake timeline. Appears when it scrolls into view and
- * dissolves when it leaves — both directions, no `once`. The node on the
- * spine is a button that toggles the domain filter.
+ * dissolves when it leaves — both directions, no `once`. The node sitting
+ * on the snake in the gap above the card is a button that toggles the
+ * domain filter.
  */
 function TimelineEntry({
   project,
@@ -57,8 +68,12 @@ function TimelineEntry({
       ref={ref}
       className="relative py-6 md:grid md:grid-cols-[1fr_5rem_1fr] md:py-10"
     >
-      {/* node on the line — click to filter the snake by this domain */}
-      <div className="absolute left-4 top-8 z-10 md:left-1/2 md:top-10 md:-translate-x-1/2">
+      {/* node on the snake, in the band above the card — click to filter */}
+      <div
+        className={`absolute left-4 top-0 z-10 -translate-x-1/2 ${
+          side === "left" ? "md:left-[25%]" : "md:left-[75%]"
+        }`}
+      >
         <button
           type="button"
           aria-pressed={activeDomain === project.domain}
@@ -67,9 +82,10 @@ function TimelineEntry({
           } ${domainLabels[project.domain]} projects`}
           title={`filter by ${domainLabels[project.domain]}`}
           onClick={() => onToggleDomain(project.domain)}
-          className="-m-2 grid size-8 cursor-pointer place-items-center rounded-full outline-none transition-transform hover:scale-125 focus-visible:ring-2 focus-visible:ring-accent-link motion-reduce:transition-none"
+          className="grid size-8 cursor-pointer place-items-center rounded-full outline-none transition-transform hover:scale-125 focus-visible:ring-2 focus-visible:ring-accent-link motion-reduce:transition-none"
         >
           <span
+            data-node
             className="block size-3.5 rounded-full border-2 bg-bg transition-all duration-700 motion-reduce:transition-none"
             style={{
               borderColor: hue,
@@ -156,14 +172,17 @@ function TimelineEntry({
 }
 
 /**
- * The full project history as a snake timeline: a center line that fills
- * with scroll progress, cards alternating sides, each entry dissolving in
- * and out as it crosses the viewport.
+ * The full project history as a snake timeline: a single winding path that
+ * serpentes between the alternating cards — swinging out to each node in the
+ * open band above a card, then crossing the center channel beside the next
+ * one. The amber glow charges along the path with scroll progress.
  */
 export function ProjectTimeline({ projects }: { projects: Project[] }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const fillRef = useRef<HTMLDivElement>(null);
+  const fillRef = useRef<SVGPathElement>(null);
+  const lenRef = useRef(0);
   const [domain, setDomain] = useState<ProjectDomain | null>(null);
+  const [pathD, setPathD] = useState("");
 
   const toggleDomain = (next: ProjectDomain) =>
     setDomain((current) => (current === next ? null : next));
@@ -172,26 +191,86 @@ export function ProjectTimeline({ projects }: { projects: Project[] }) {
   const shown = domain
     ? projects.filter((p) => p.domain === domain)
     : projects;
+  const shownKey = shown.map((p) => p.slug).join("|");
 
+  /**
+   * Measure the node dots and build one smooth path through them: vertical
+   * tangents at every node, so the curve leaves each dot head-on and swings
+   * across the middle channel on the way to the next.
+   */
+  const rebuildPath = useCallback(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const wRect = wrap.getBoundingClientRect();
+    const dots = Array.from(wrap.querySelectorAll<HTMLElement>("[data-node]"));
+    if (dots.length === 0) {
+      setPathD("");
+      return;
+    }
+    const pts = dots.map((dot) => {
+      const r = dot.getBoundingClientRect();
+      return {
+        x: r.left - wRect.left + r.width / 2,
+        y: r.top - wRect.top + r.height / 2,
+      };
+    });
+    // Tail: run the last segment down to the bottom of the section.
+    const all = [...pts, { x: pts[pts.length - 1].x, y: wRect.height }];
+
+    let d = `M ${all[0].x.toFixed(1)} ${all[0].y.toFixed(1)}`;
+    for (let i = 0; i < all.length - 1; i++) {
+      const a = all[i];
+      const b = all[i + 1];
+      const dy = (b.y - a.y) / 2;
+      d += ` C ${a.x.toFixed(1)} ${(a.y + dy).toFixed(1)}, ${b.x.toFixed(1)} ${(
+        b.y - dy
+      ).toFixed(1)}, ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+    }
+    setPathD(d);
+  }, []);
+
+  // Re-measure on layout changes and whenever the filtered set re-forms.
   useEffect(() => {
+    rebuildPath();
+    const wrap = wrapRef.current;
+    if (!wrap || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(rebuildPath);
+    ro.observe(wrap);
+    return () => ro.disconnect();
+  }, [rebuildPath, shownKey]);
+
+  /** Charge the glow along the path with scroll progress. */
+  const updateFill = useCallback(() => {
     const wrap = wrapRef.current;
     const fill = fillRef.current;
-    if (!wrap || !fill) return;
+    if (!wrap || !fill || !lenRef.current) return;
+    const r = wrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = r.height + vh * 0.25;
+    const passed = Math.min(1, Math.max(0, (vh * 0.65 - r.top) / total));
+    fill.style.strokeDashoffset = `${lenRef.current * (1 - passed)}`;
+  }, []);
 
+  // Size the dash to the path before first paint so nothing flashes full.
+  useIsoLayoutEffect(() => {
+    const fill = fillRef.current;
+    if (!fill || !pathD) {
+      lenRef.current = 0;
+      return;
+    }
+    const len = fill.getTotalLength();
+    lenRef.current = len;
+    fill.style.strokeDasharray = String(len);
+    updateFill();
+  }, [pathD, updateFill]);
+
+  useEffect(() => {
     let raf = 0;
-    const update = () => {
-      const r = wrap.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const total = r.height + vh * 0.25;
-      const passed = Math.min(1, Math.max(0, (vh * 0.65 - r.top) / total));
-      fill.style.height = `${passed * 100}%`;
-    };
     const onScroll = () => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
+      raf = requestAnimationFrame(updateFill);
     };
-
-    update();
+    updateFill();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -199,17 +278,22 @@ export function ProjectTimeline({ projects }: { projects: Project[] }) {
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [updateFill]);
 
   return (
     <div ref={wrapRef} className="relative">
       {/* grep-style status row for the domain filter */}
-      <div className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 pl-10 font-mono text-xs md:pl-0" aria-live="polite">
+      <div
+        className="relative mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 pl-10 font-mono text-xs md:pl-0"
+        aria-live="polite"
+      >
         <span className="select-none text-text-muted" aria-hidden="true">
           $ timeline
         </span>
         <span className="text-accent-add">
-          {domain ? `--domain ${domainLabels[domain].toLowerCase()}` : "--all"}
+          {domain
+            ? `--domain ${domainLabels[domain].toLowerCase()}`
+            : "--all"}
         </span>
         {domain && (
           <>
@@ -226,23 +310,41 @@ export function ProjectTimeline({ projects }: { projects: Project[] }) {
           </>
         )}
         {!domain && (
-          <span className="text-text-muted/70">· click a node to filter by domain</span>
+          <span className="text-text-muted/70">
+            · click a node to filter by domain
+          </span>
         )}
       </div>
 
-      {/* the snake's spine: base rail + scroll-charged fill */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-4 top-0 w-px bg-border md:left-1/2 md:-translate-x-1/2"
-      />
-      <div
-        ref={fillRef}
-        aria-hidden="true"
-        className="absolute left-4 top-0 w-px bg-accent-add shadow-[0_0_14px_rgba(210,153,34,0.7)] md:left-1/2 md:-translate-x-1/2"
-        style={{ height: "0%" }}
-      />
+      {/* the snake: one winding path, base rail + scroll-charged glow */}
+      {pathD && (
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+        >
+          <path
+            d={pathD}
+            fill="none"
+            className="stroke-border"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+          />
+          <path
+            ref={fillRef}
+            d={pathD}
+            fill="none"
+            className="stroke-accent-add"
+            strokeWidth={2}
+            strokeLinecap="round"
+            style={{
+              filter: "drop-shadow(0 0 6px rgba(210,153,34,0.7))",
+            }}
+          />
+        </svg>
+      )}
 
-      <div>
+      {/* positioned above the svg so the snake weaves behind the cards */}
+      <div className="relative">
         {shown.map((project, i) => (
           <TimelineEntry
             key={project.slug}
