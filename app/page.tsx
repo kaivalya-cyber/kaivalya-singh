@@ -5,6 +5,7 @@ import { Hero } from "@/components/hero";
 import { ProjectLog } from "@/components/project-log";
 import { SkillsGrid } from "@/components/skills-grid";
 import { ContributionsSection } from "@/components/contributions-section";
+import { ImpactGlobeSection } from "@/components/impact-globe-section";
 import { StrengthsStrip } from "@/components/strengths-strip";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <ProjectLog />
         <SkillsGrid />
         <ContributionsSection />
+        <ImpactGlobeSection />
         <StrengthsStrip />
         <ContactFooter />
       </main>
