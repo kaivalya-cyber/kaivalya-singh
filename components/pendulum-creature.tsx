@@ -498,9 +498,13 @@ export function PendulumCreature({ className = "" }: PendulumCreatureProps) {
       const grabbed = grabRef.current?.active ?? false;
 
       if (grabbed) {
-        // The visitor holds the angle; the cart still has to balance.
-        force -= K_POSITION * s.x;
-        force -= K_VELOCITY * s.vx;
+        // The visitor holds the bob; the cart auto-balances by driving
+        // underneath it. Holding the pole at angle θ requires the pivot to
+        // accelerate at g·tanθ — the classic cart-pole equilibrium — so the
+        // controller feeds that forward and damps the drift. Push the bob
+        // left or right and the cart visibly chases under it.
+        force += TOTAL_MASS * GRAVITY * Math.tan(s.theta) * 0.92;
+        force -= K_VELOCITY * s.vx * 0.55;
       } else {
         // PD controller
         force -= KP * s.theta;
@@ -531,8 +535,8 @@ export function PendulumCreature({ className = "" }: PendulumCreatureProps) {
         pokeFlashRef.current = Math.max(0, pokeFlashRef.current - 0.03);
       }
 
-      // Idle noise
-      force += (Math.random() - 0.5) * NOISE_STRENGTH;
+      // Idle noise (suspended while the visitor holds the bob)
+      if (!grabbed) force += (Math.random() - 0.5) * NOISE_STRENGTH;
 
       stepPhysics(s, force);
       forceRef.current = force;
@@ -651,7 +655,9 @@ export function PendulumCreature({ className = "" }: PendulumCreatureProps) {
         >
           [ poke ]
         </button>
-        <span className="hidden sm:inline">push · grab the bob · shove the cart</span>
+        <span className="hidden sm:inline">
+          push · grab the bob — the cart drives to catch it · shove the cart
+        </span>
       </div>
     </div>
   );
