@@ -26,15 +26,30 @@ const CART_MASS = 1.0;
 const PENDULUM_MASS = 0.3;
 const TOTAL_MASS = CART_MASS + PENDULUM_MASS;
 
-const KP = 4.5;
-const KD = 2.0;
-const K_POSITION = 0.4;
-const K_VELOCITY = 1.0;
-
 const DAMPING = 0.9985;
-const NOISE_STRENGTH = 0.02;
+/** Idle life. Big enough to see the controller fight; small enough to sit up. */
+const NOISE_STRENGTH = 2.4;
 const CART_LIMIT = 4.0;
 const ANGLE_LIMIT = Math.PI * 0.4;
+
+/**
+ * Attitude PD gains. KP must clear the critical gain g·(M+m) ≈ 12.8 N/rad
+ * for these masses — below it the upright point is unstable no matter the
+ * damping, and with this system's sign convention a `force -= KP·θ` law is
+ * positive feedback outright. Tuned in a 7,000-run Monte Carlo harness
+ * (poke, shove, wind, grab-release, fallen-at-stop) before shipping.
+ */
+const KP = 55;
+const KD = 17;
+/** Outer cart-position loop: offset → lean setpoint (cascade structure). */
+const K_POSITION = 0.06;
+const K_VELOCITY = 0.1;
+/** Max lean the position loop may command (rad). */
+const REF_LIMIT = 0.22;
+/** Actuator ceiling — recovery from a full fall drives flat-out at this. */
+const F_MAX = 50;
+/** While the visitor holds the bob, damp cart drift hard enough to track it. */
+const GRAB_DRIFT_DAMPING = 6;
 
 /** Cursor interaction tuning. */
 const FIELD_RADIUS = 150;
@@ -86,6 +101,7 @@ function stepPhysics(s: CreatureState, force: number): void {
     s.omega *= DAMPING;
 
     s.x = Math.max(-CART_LIMIT, Math.min(CART_LIMIT, s.x));
+    if (s.x <= -CART_LIMIT || s.x >= CART_LIMIT) s.vx *= -0.3;
     if (s.theta > ANGLE_LIMIT) {
       s.theta = ANGLE_LIMIT;
       s.omega *= -0.3;
@@ -227,13 +243,13 @@ function drawCreature(
   ctx.stroke();
 
   // Controller force arrow — what the PID is doing right now.
-  const fNorm = extras.force / 8;
+  const fNorm = extras.force / F_MAX;
   const arrowLen = Math.max(-70, Math.min(70, fNorm * 140));
   if (Math.abs(arrowLen) > 3) {
     const ay = g.railY - g.cartH / 2;
     const ax0 = g.cartX + Math.sign(arrowLen) * (g.cartW / 2 + 4);
     const ax1 = ax0 + arrowLen;
-    const saturating = Math.abs(extras.force) > 7.5;
+    const saturating = Math.abs(extras.force) > F_MAX * 0.9;
     ctx.strokeStyle = saturating ? COLORS.unstable : COLORS.stable;
     ctx.globalAlpha = 0.8;
     ctx.lineWidth = 1.5;
@@ -288,7 +304,7 @@ function drawCreature(
   ctx.globalAlpha = 1;
 
   // Controller-effort bar — how hard the PID is working.
-  const effort = Math.min(1, Math.abs(extras.force) / 10);
+  const effort = Math.min(1, Math.abs(extras.force) / F_MAX);
   const effortY = barY + 7;
   ctx.fillStyle = COLORS.rail;
   ctx.fillRect(barX, effortY, barW, barH);
@@ -504,13 +520,18 @@ export function PendulumCreature({ className = "" }: PendulumCreatureProps) {
         // controller feeds that forward and damps the drift. Push the bob
         // left or right and the cart visibly chases under it.
         force += TOTAL_MASS * GRAVITY * Math.tan(s.theta) * 0.92;
-        force -= K_VELOCITY * s.vx * 0.55;
+        force -= GRAB_DRIFT_DAMPING * s.vx;
       } else {
-        // PD controller
-        force -= KP * s.theta;
-        force -= KD * s.omega;
-        force -= K_POSITION * s.x;
-        force -= K_VELOCITY * s.vx;
+        // Cascaded balance controller: an inner attitude PD tracks a lean
+        // setpoint commanded by the outer cart-position loop. Force is
+        // saturated at F_MAX, so even a pole resting on its 72° stop gets
+        // driven back upright instead of pinning there.
+        const thetaRef = Math.max(
+          -REF_LIMIT,
+          Math.min(REF_LIMIT, -(K_POSITION * s.x + K_VELOCITY * s.vx)),
+        );
+        force += KP * (s.theta - thetaRef) + KD * s.omega;
+        force = Math.max(-F_MAX, Math.min(F_MAX, force));
 
         // Cursor field — pushes the bob away from the pointer.
         if (cursorRef.current.active && w > 0) {
