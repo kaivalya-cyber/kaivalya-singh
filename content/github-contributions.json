@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-09T13:27:42.909Z",
+  "fetchedAt": "2026-09-10T13:20:32.276Z",
   "calendar": {
     "days": [
       {
@@ -1051,7 +1051,7 @@
       {
         "date": "2026-08-26",
         "level": 1,
-        "count": 5
+        "count": 8
       },
       {
         "date": "2026-09-02",
@@ -1324,6 +1324,11 @@
         "count": 2
       },
       {
+        "date": "2026-09-10",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-09-12",
         "level": 0,
         "count": 0
@@ -1581,7 +1586,7 @@
       {
         "date": "2026-09-04",
         "level": 1,
-        "count": 2
+        "count": 3
       },
       {
         "date": "2025-09-13",
@@ -1841,10 +1846,10 @@
       {
         "date": "2026-09-05",
         "level": 1,
-        "count": 3
+        "count": 4
       }
     ],
-    "total": 738,
+    "total": 743,
     "activeDays": 88,
     "bestDay": {
       "date": "2026-06-22",
@@ -1858,16 +1863,16 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 27,
-      "open": 6,
-      "merged": 5,
+      "open": 4,
+      "merged": 7,
       "closedUnmerged": 16,
       "recent": [
         {
           "title": "Match NumPy isinf/isneginf/isposinf behavior for complex inputs",
           "url": "https://github.com/tensorflow/tensorflow/pull/126895",
           "number": 126895,
-          "state": "open",
-          "date": "2026-09-06"
+          "state": "merged",
+          "date": "2026-09-10"
         },
         {
           "title": "Validate axis bounds in experimental.numpy roll and flip",
