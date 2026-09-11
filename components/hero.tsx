@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useSpring, animated } from "@react-spring/web";
 import { animate, stagger } from "animejs";
 import { site } from "@/content/site";
@@ -117,7 +118,15 @@ export function Hero() {
               );
             })}
           </div>
-        </animated.div>
+          {/* Lab link — the ASCII-effect playground lives on its own route */}
+        <Link
+          href="/lab"
+          className="hero-reveal mt-6 inline-flex items-center gap-2 font-mono text-xs text-text-muted transition-colors hover:text-accent-add"
+        >
+          $ open <span className="text-accent-link">lab/ascii-effect</span>
+          <span aria-hidden="true">→</span>
+        </Link>
+      </animated.div>
       </div>
 
       {/* Pendulum creature — inverted-pendulum control-systems demo */}
