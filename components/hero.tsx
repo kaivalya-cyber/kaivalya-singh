@@ -121,8 +121,9 @@ export function Hero() {
           {/* Lab link — the ASCII-effect playground lives on its own route */}
         <Link
           href="/lab"
-          className="hero-reveal mt-6 inline-flex items-center gap-2 font-mono text-xs text-text-muted transition-colors hover:text-accent-add"
+          className="hero-reveal mt-6 inline-flex items-center gap-2 border border-border bg-bg-raised/60 px-4 py-2 font-mono text-xs text-text-primary transition-all hover:border-accent-add hover:bg-bg-raised hover:text-accent-add"
         >
+          <span aria-hidden="true" className="text-accent-add">▸</span>
           $ open <span className="text-accent-link">lab/ascii-effect</span>
           <span aria-hidden="true">→</span>
         </Link>
