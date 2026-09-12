@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Angular spider emblem on a dark warm field">
+  <!-- Source plate for the ASCII-effect backdrop: composition matched to the
+       reference (light emblem, dark field), colors re-keyed red -> amber. -->
+  <rect width="1200" height="800" fill="#261809"/>
+
+  <g fill="#D8D2C4" stroke="none">
+    <!-- abdomen: elongated shield -->
+    <path d="M600,352
+             C642,378 650,438 642,498
+             C636,552 620,586 600,602
+             C580,586 564,552 558,498
+             C550,438 558,378 600,352 Z"/>
+    <!-- head -->
+    <ellipse cx="600" cy="320" rx="35" ry="31"/>
+    <!-- neck -->
+    <path d="M582,344 L618,344 L614,362 L586,362 Z"/>
+    <!-- fangs -->
+    <path d="M581,298 C575,282 578,268 590,258 C587,274 588,286 592,296 Z"/>
+    <path d="M619,298 C625,282 622,268 610,258 C613,274 612,286 608,296 Z"/>
+  </g>
+
+  <!-- right legs: shoulder -> joint -> tip, tapering strokes -->
+  <g fill="none" stroke="#D8D2C4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- L1: steep up -->
+    <path d="M612,326 L690,218" stroke-width="19"/>
+    <path d="M690,218 L742,100" stroke-width="7"/>
+    <!-- L2: up and out -->
+    <path d="M618,336 L722,268" stroke-width="17"/>
+    <path d="M722,268 L792,182" stroke-width="6"/>
+    <!-- L3: out, hooked down -->
+    <path d="M620,352 L742,374" stroke-width="15"/>
+    <path d="M742,374 L784,474" stroke-width="6"/>
+    <!-- L4: down cradle -->
+    <path d="M615,372 L690,492" stroke-width="17"/>
+    <path d="M690,492 L668,650" stroke-width="6"/>
+  </g>
+
+  <!-- left legs: mirror of the right -->
+  <g transform="translate(1200 0) scale(-1 1)">
+    <g fill="none" stroke="#D8D2C4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M612,326 L690,218" stroke-width="19"/>
+      <path d="M690,218 L742,100" stroke-width="7"/>
+      <path d="M618,336 L722,268" stroke-width="17"/>
+      <path d="M722,268 L792,182" stroke-width="6"/>
+      <path d="M620,352 L742,374" stroke-width="15"/>
+      <path d="M742,374 L784,474" stroke-width="6"/>
+      <path d="M615,372 L690,492" stroke-width="17"/>
+      <path d="M690,492 L668,650" stroke-width="6"/>
+    </g>
+  </g>
+</svg>
