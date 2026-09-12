@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { useSpring, animated } from "@react-spring/web";
 import { animate, stagger } from "animejs";
 import { site } from "@/content/site";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
 import { usePrefersReducedMotion } from "@/lib/motion-preferences";
 import { HeroAmbient } from "@/components/hero-ambient";
-import { AsciiArt } from "@/components/ui/asthetic";
+import { AsciiBackdrop } from "@/components/ascii-backdrop";
 import { PendulumCreature } from "@/components/pendulum-creature";
 
 const DIFF_STYLES: Record<string, { marker: string; className: string }> = {
@@ -60,7 +59,7 @@ export function Hero() {
         style={{ transform: scrollSprings.bgY.to((y) => `translate3d(0, ${y}px, 0)`) }}
         className="hero-ascii absolute inset-0"
       >
-        <AsciiArt className="h-full w-full" />
+        <AsciiBackdrop className="absolute inset-0" />
         <div className="hero-ascii-tint" />
         <div className="hero-ascii-mask" />
         <div className="hero-ascii-glow" />
@@ -118,15 +117,6 @@ export function Hero() {
               );
             })}
           </div>
-          {/* Lab link — the ASCII-effect playground lives on its own route */}
-        <Link
-          href="/lab"
-          className="hero-reveal mt-6 inline-flex items-center gap-2 border border-border bg-bg-raised/60 px-4 py-2 font-mono text-xs text-text-primary transition-all hover:border-accent-add hover:bg-bg-raised hover:text-accent-add"
-        >
-          <span aria-hidden="true" className="text-accent-add">▸</span>
-          $ open <span className="text-accent-link">lab/ascii-effect</span>
-          <span aria-hidden="true">→</span>
-        </Link>
       </animated.div>
       </div>
 
