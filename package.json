@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "fetch:github": "node scripts/fetch-github-data.mjs",
+    "fetch:repos": "node scripts/fetch-repo-telemetry.mjs",
     "fetch:contrib-svg": "bash scripts/fetch-contrib-svg.sh"
   },
   "dependencies": {

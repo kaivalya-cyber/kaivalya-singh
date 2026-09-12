@@ -10,6 +10,8 @@ import { usePrefersReducedMotion } from "@/lib/motion-preferences";
 import { StatCounter } from "@/components/stat-counter";
 import { DiffReveal } from "@/components/diff-reveal";
 import { ProjectFigure } from "@/components/project-figure";
+import { RepoTelemetry } from "@/components/repo-telemetry";
+import { ProseReveal } from "@/components/prose-reveal";
 import { projectWriteups, projectWriteupIntro } from "@/content/writeups";
 
 interface ProjectPageContentProps {
@@ -145,15 +147,19 @@ export function ProjectPageContent({
         {/* Figure — real data from the project, drawn in on scroll */}
         <ProjectFigure slug={project.slug} />
 
-        {/* Long-form prose — single-column, research-paper width */}
+        {/* Live repo telemetry — languages, commit graph, stats from GitHub */}
+        <RepoTelemetry slug={project.slug} />
+
+        {/* Long-form prose — word-cascade reveal, research-paper width */}
         <section aria-label="Writeup" className="mx-auto max-w-3xl py-14">
-          <div className="space-y-7 text-base leading-[1.85] text-text-primary md:text-lg">
+          <div className="space-y-7 text-base text-text-primary md:text-lg">
             {writeup.map((paragraph, i) => (
-              <DiffReveal key={i} delay={i * 40} fromY={12}>
-                <p className={i === 0 ? "first-letter:text-3xl first-letter:font-display first-letter:text-accent-add first-letter:float-left first-letter:mr-2 first-letter:mt-1" : ""}>
-                  {renderEmphasis(paragraph)}
-                </p>
-              </DiffReveal>
+              <ProseReveal
+                key={i}
+                text={paragraph}
+                dropCap={i === 0}
+                delay={i === 0 ? 0 : 60}
+              />
             ))}
           </div>
         </section>
@@ -209,15 +215,3 @@ export function ProjectPageContent({
   );
 }
 
-function renderEmphasis(text: string) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong key={index} className="font-semibold text-accent-add">
-          {part.slice(2, -2)}
-        </strong>
-      );
-    }
-    return part;
-  });
-}
