@@ -87,18 +87,18 @@ body {
 
 /* ── ASCII backdrop: the animated Canvas2D effect behind the hero ─────────
  * Layers bottom-up inside .hero-ascii (position: relative):
- *   1. the canvas (in DOM) — the 21st.dev recipe re-keyed to amber, with
- *      vignette + film-grain + glitch already baked into the render
+ *   1. the video (in DOM), tinted sepia + darkened via filter
  *   2. .hero-ascii-tint   — flat page-color veils, strong at the edges so
  *                           text always sits on solid ground
  *   3. .hero-ascii-mask   — page-colored bottom fade (fade-out to content)
  *   4. .hero-ascii-glow   — one amber CRT hotspot, radial so it never reads
  *                           as an "AI gradient banner"
  */
-.hero-ascii canvas {
-  /* Keep the amber render grounded to the page tone: dim it so the glyphs
-     read as texture, not as a competing subject. */
-  filter: brightness(0.72) saturate(0.9);
+.hero-ascii video {
+  /* Match the recipe's own warm tones, then pull it toward the page.
+     Bright enough that the glyphs read as texture, dim enough for copy. */
+  filter: sepia(var(--ascii-warm)) saturate(0.85) brightness(0.82)
+    contrast(1.12);
 }
 
 .hero-ascii-tint,

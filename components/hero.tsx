@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
 import { usePrefersReducedMotion } from "@/lib/motion-preferences";
 import { HeroAmbient } from "@/components/hero-ambient";
-import { AsciiBackdrop } from "@/components/ascii-backdrop";
+import { AsciiArt } from "@/components/ui/asthetic";
 import { PendulumCreature } from "@/components/pendulum-creature";
 
 const DIFF_STYLES: Record<string, { marker: string; className: string }> = {
@@ -59,7 +59,7 @@ export function Hero() {
         style={{ transform: scrollSprings.bgY.to((y) => `translate3d(0, ${y}px, 0)`) }}
         className="hero-ascii absolute inset-0"
       >
-        <AsciiBackdrop className="absolute inset-0" />
+        <AsciiArt className="h-full w-full" />
         <div className="hero-ascii-tint" />
         <div className="hero-ascii-mask" />
         <div className="hero-ascii-glow" />
