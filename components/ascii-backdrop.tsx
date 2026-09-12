@@ -59,11 +59,11 @@ const SETTINGS: AsciiArtSettings = {
   fps: 30,
 };
 
-/* The recipe ships without a recorded source photo — the reference frames a
- * light subject on a dark field (the emblem shows through the bg plate at
- * bgOpacity while invert:true animates the field around it). This plate is
- * authored in that composition, re-keyed red -> amber. */
-const SOURCE = "/spider-emblem.svg";
+/* The recipe ships without a recorded source photo. A high-contrast portrait
+ * with strong directional structure gives the line-hatch pass something to
+ * bite on (URL verified live at build time). */
+const SOURCE =
+  "https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=1200&q=80&auto=format&fit=crop";
 
 export function AsciiBackdrop({ className }: { className?: string }) {
   return (
