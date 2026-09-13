@@ -44,6 +44,9 @@ export interface CoverflowCarouselProps {
   cardClassName?: string;
   /** Reports the centered slide index so the host can sync external UI. */
   onSelect?: (index: number) => void;
+  /** Fired when the centered card is activated — a still tap/click on the
+      centre card, or Enter/Space while the carousel is focused. */
+  onSlideOpen?: (index: number) => void;
 }
 
 export function CoverflowCarousel({
@@ -64,6 +67,7 @@ export function CoverflowCarousel({
   cardClassName,
   accent,
   onSelect,
+  onSlideOpen,
 }: CoverflowCarouselProps) {
   const count = slides.length;
 
@@ -84,6 +88,8 @@ export function CoverflowCarousel({
     pos: number;
     v: number;
     t: number;
+    /** False until the pointer travels — separates taps from drags. */
+    moved: boolean;
   } | null>(null);
 
   const [selected, setSelected] = React.useState(0);
@@ -92,6 +98,10 @@ export function CoverflowCarousel({
   React.useEffect(() => {
     onSelectRef.current = onSelect;
   }, [onSelect]);
+  const onSlideOpenRef = React.useRef(onSlideOpen);
+  React.useEffect(() => {
+    onSlideOpenRef.current = onSlideOpen;
+  }, [onSlideOpen]);
 
   /** Nearest whole card, folded back into 0..count-1. */
   const indexAt = React.useCallback(
@@ -208,6 +218,7 @@ export function CoverflowCarousel({
       pos: posRef.current,
       v: 0,
       t: performance.now(),
+      moved: false,
     };
   };
 
@@ -221,6 +232,8 @@ export function CoverflowCarousel({
     const now = performance.now();
     const previous = posRef.current;
     posRef.current = clamp(drag.pos - (event.clientX - drag.x) / pitch);
+    // Past a few pixels this is a drag, not a tap.
+    if (Math.abs(event.clientX - drag.x) > 8) drag.moved = true;
     // Cards per second, for the throw.
     drag.v = ((posRef.current - previous) / Math.max(now - drag.t, 1)) * 1000;
     drag.t = now;
@@ -237,6 +250,33 @@ export function CoverflowCarousel({
     const drag = dragRef.current;
     if (!drag || drag.id !== event.pointerId) return;
     dragRef.current = null;
+
+    // A still press is a tap. Pointer capture retargets the event to the
+    // frame, so the card under the pointer is recovered from geometry: the
+    // cards sit a whole pitch apart, centred on the frame's midline.
+    if (event.type === "pointerup" && !drag.moved) {
+      const frame = frameRef.current;
+      const pitch = widthRef.current * (1 + gap);
+      if (frame && pitch) {
+        const rect = frame.getBoundingClientRect();
+        const tapped = Math.round(
+          (event.clientX - (rect.left + rect.width / 2)) / pitch,
+        );
+        // Never reach past the visible half of the ring.
+        const offset = Math.max(
+          -Math.floor(count / 2),
+          Math.min(Math.floor(count / 2), tapped),
+        );
+        const index = indexAt(Math.round(posRef.current) + offset);
+        if (offset === 0) {
+          onSlideOpenRef.current?.(index);
+          return;
+        }
+        settle(clamp(Math.round(posRef.current) + offset));
+        return;
+      }
+    }
+
     // Let a flick carry, but never more than two cards.
     const carried = Math.max(-2, Math.min(2, drag.v * 0.18));
     settle(clamp(Math.round(posRef.current + carried)));
@@ -296,6 +336,9 @@ export function CoverflowCarousel({
             } else if (event.key === "ArrowRight") {
               event.preventDefault();
               nudge(1);
+            } else if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              onSlideOpenRef.current?.(indexAt(targetRef.current));
             }
           }}
           // Vertical padding keeps the drop shadows clear of the overflow clip.

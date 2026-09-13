@@ -42,7 +42,10 @@ const MARKER = [0.91, 0.83, 0.66] as const; // pale amber pins
  * Cambridge: MIT BWSI Quantum Software (site.ts background).
  * San Jose area: Evergreen Valley HS + Second Harvest Food Bank (site.ts).
  * Newark, DE: Olostep corporate office (verified via PitchBook).
- * FTC: FIRST HQ in Manchester, NH — the 1,762-match dataset's source org. */
+ * FTC: FIRST HQ in Manchester, NH — the 1,762-match dataset's source org.
+ * Hanoi: FTC team the user mentored (per user).
+ * Berlin: Olostep Europe presence — user-directed; the company site lists no
+ *   German address, so the pin is placed in Berlin as the fallback. */
 const IMPACT_MARKERS: ImpactMarker[] = [
   {
     id: "sanjose",
@@ -93,6 +96,20 @@ const IMPACT_MARKERS: ImpactMarker[] = [
     detail: "FIRST HQ — source org of the FTC Open Analytics Dataset",
     stat: "1,762 matches · 902 teams",
   },
+  {
+    id: "hanoi",
+    location: [21.0278, 105.8342],
+    label: "hanoi, vietnam",
+    detail: "Mentored an FTC team — build, strategy and autonomous programming",
+    stat: "first tech challenge",
+  },
+  {
+    id: "berlin",
+    location: [52.52, 13.405],
+    label: "berlin, germany",
+    detail: "Olostep — Europe presence (web data infra for AI agents)",
+    stat: "eu side",
+  },
 ];
 
 /* Arcs connect the places into one story: home → the work. */
@@ -103,6 +120,8 @@ const IMPACT_ARCS: ImpactArc[] = [
   { id: "arc-sj-cam", from: [37.3382, -121.8863], to: [42.3601, -71.0942] },
   { id: "arc-cam-mht", from: [42.3601, -71.0942], to: [42.9956, -71.4548] },
   { id: "arc-sf-new", from: [37.7749, -122.4194], to: [39.6837, -75.7497] },
+  { id: "arc-cam-han", from: [42.3601, -71.0942], to: [21.0278, 105.8342] },
+  { id: "arc-sf-ber", from: [37.7749, -122.4194], to: [52.52, 13.405] },
 ];
 
 export function GlobeImpact({

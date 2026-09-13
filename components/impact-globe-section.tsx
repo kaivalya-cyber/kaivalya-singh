@@ -31,7 +31,7 @@ export function ImpactGlobeSection() {
             <p className="mt-5 text-text-muted">
               Home is {site.location}. The rest are the places the work touched
               — an internship HQ, an open-source foundation, a summer program,
-              and the nonprofits. Drag the globe.
+              the nonprofits, and a team mentored overseas. Drag the globe.
             </p>
           </div>
         </DiffReveal>
@@ -81,6 +81,16 @@ export function ImpactGlobeSection() {
                 label: "newark, de",
                 detail: "Olostep corporate office",
                 stat: "web data infra",
+              },
+              {
+                label: "berlin, germany",
+                detail: "Olostep — Europe presence",
+                stat: "eu side",
+              },
+              {
+                label: "hanoi, vietnam",
+                detail: "Mentored an FTC team — build, strategy, autonomous programming",
+                stat: "first tech challenge",
               },
             ].map((pin) => (
               <div

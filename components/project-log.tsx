@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { domainLabels, projects, type Project } from "@/content/projects";
 import { DiffReveal } from "@/components/diff-reveal";
 import { ProjectTimeline } from "@/components/project-timeline";
@@ -67,9 +68,15 @@ function buildStackIndex(all: Project[]): string[] {
 }
 
 function FeaturedWork() {
+  const router = useRouter();
   const [activeIdx, setActiveIdx] = useState(0);
   const active = featuredProjects[activeIdx] ?? featuredProjects[0];
   const cover = COVERS[active.slug];
+
+  const openProject = (index: number) => {
+    const p = featuredProjects[index];
+    if (p) router.push(`/projects/${p.slug}`);
+  };
 
   return (
     <div className="relative">
@@ -100,7 +107,7 @@ function FeaturedWork() {
           <span className="text-text-muted"> --featured --oneline</span>
         </p>
         <p className="font-mono text-[0.65rem] text-text-muted">
-          drag · arrow keys · click a dot
+          drag · arrow keys · tap a card
         </p>
       </div>
 
@@ -111,6 +118,7 @@ function FeaturedWork() {
         showPagination
         accent={cover.hue}
         onSelect={setActiveIdx}
+        onSlideOpen={openProject}
         label="Featured projects"
         cardClassName="border border-border"
       />
@@ -154,6 +162,14 @@ function FeaturedWork() {
         )}
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-xs">
+          <button
+            type="button"
+            onClick={() => openProject(activeIdx)}
+            className="border border-border px-3 py-1.5 transition-colors hover:border-accent-link hover:text-accent-link"
+            style={{ color: cover.hue }}
+          >
+            open project ↵
+          </button>
           <a
             href={`/projects/${active.slug}`}
             className="text-accent-link transition-colors hover:text-text-primary"
