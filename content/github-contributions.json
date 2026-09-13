@@ -1,13 +1,8 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-12T12:38:44.572Z",
+  "fetchedAt": "2026-09-13T13:41:16.411Z",
   "calendar": {
     "days": [
-      {
-        "date": "2025-09-07",
-        "level": 0,
-        "count": 0
-      },
       {
         "date": "2025-09-14",
         "level": 0,
@@ -269,7 +264,7 @@
         "count": 1
       },
       {
-        "date": "2025-09-08",
+        "date": "2026-09-13",
         "level": 0,
         "count": 0
       },
@@ -534,11 +529,6 @@
         "count": 17
       },
       {
-        "date": "2025-09-09",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-09-16",
         "level": 0,
         "count": 0
@@ -795,11 +785,6 @@
       },
       {
         "date": "2026-09-08",
-        "level": 0,
-        "count": 0
-      },
-      {
-        "date": "2025-09-10",
         "level": 0,
         "count": 0
       },
@@ -1064,11 +1049,6 @@
         "count": 0
       },
       {
-        "date": "2025-09-11",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-09-18",
         "level": 0,
         "count": 0
@@ -1327,11 +1307,6 @@
         "date": "2026-09-10",
         "level": 1,
         "count": 1
-      },
-      {
-        "date": "2025-09-12",
-        "level": 0,
-        "count": 0
       },
       {
         "date": "2025-09-19",
@@ -1594,11 +1569,6 @@
         "count": 7
       },
       {
-        "date": "2025-09-13",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-09-20",
         "level": 0,
         "count": 0
@@ -1855,12 +1825,12 @@
       },
       {
         "date": "2026-09-12",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 9
       }
     ],
-    "total": 751,
-    "activeDays": 90,
+    "total": 760,
+    "activeDays": 91,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1872,11 +1842,25 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 27,
-      "open": 4,
+      "total": 29,
+      "open": 6,
       "merged": 7,
       "closedUnmerged": 16,
       "recent": [
+        {
+          "title": "Validate axis bounds in experimental.numpy cumsum and cumprod",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127297",
+          "number": 127297,
+          "state": "open",
+          "date": "2026-09-13"
+        },
+        {
+          "title": "Replace assert with ValueError for axis validation in np.compress",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127296",
+          "number": 127296,
+          "state": "open",
+          "date": "2026-09-13"
+        },
         {
           "title": "Match NumPy isinf/isneginf/isposinf behavior for complex inputs",
           "url": "https://github.com/tensorflow/tensorflow/pull/126895",
@@ -1897,20 +1881,6 @@
           "number": 126325,
           "state": "closed",
           "date": "2026-08-28"
-        },
-        {
-          "title": "Use issubdtype for complex check in np.vdot",
-          "url": "https://github.com/tensorflow/tensorflow/pull/126324",
-          "number": 126324,
-          "state": "open",
-          "date": "2026-08-28"
-        },
-        {
-          "title": "Fix error message typo in np.diff for negative n",
-          "url": "https://github.com/tensorflow/tensorflow/pull/126323",
-          "number": 126323,
-          "state": "merged",
-          "date": "2026-08-31"
         }
       ]
     },
@@ -2013,11 +1983,25 @@
       "repo": "keras-team/keras",
       "label": "Keras",
       "url": "https://github.com/keras-team/keras",
-      "total": 4,
-      "open": 1,
+      "total": 6,
+      "open": 3,
       "merged": 3,
       "closedUnmerged": 0,
       "recent": [
+        {
+          "title": "Validate Adagrad initial_accumulator_value is non-negative",
+          "url": "https://github.com/keras-team/keras/pull/23624",
+          "number": 23624,
+          "state": "open",
+          "date": "2026-09-13"
+        },
+        {
+          "title": "Validate BatchNormalization momentum is in [0, 1]",
+          "url": "https://github.com/keras-team/keras/pull/23623",
+          "number": 23623,
+          "state": "open",
+          "date": "2026-09-13"
+        },
         {
           "title": "Validate Huber delta is greater than 0",
           "url": "https://github.com/keras-team/keras/pull/23573",
@@ -2038,13 +2022,6 @@
           "number": 23559,
           "state": "merged",
           "date": "2026-09-05"
-        },
-        {
-          "title": "Validate label smoothing range in loss functions",
-          "url": "https://github.com/keras-team/keras/pull/23504",
-          "number": 23504,
-          "state": "open",
-          "date": "2026-08-24"
         }
       ]
     }
