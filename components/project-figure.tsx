@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate, stagger } from "animejs";
+import { animate } from "animejs";
 import { useInView } from "@react-spring/web";
 import { usePrefersReducedMotion } from "@/lib/motion-preferences";
 
@@ -20,11 +20,27 @@ function useDrawIn(
     if (!active || reduced || !svgRef.current) return;
     const svg = svgRef.current;
 
-    const strokes = svg.querySelectorAll<SVGGeometryElement>(".fig-draw");
+    /* getTotalLength() exists only on SVGGeometryElement — <text> does not
+     * implement it (SVG 2 extension Chromium ships, WebKit never did), so
+     * probing text there throws and takes the whole React tree down the
+     * moment the figure scrolls into view. Draw strokes only; text fades
+     * in via opacity below. */
+    const strokes = svg.querySelectorAll<SVGGeometryElement>(
+      ".fig-draw:not(text):not(textArea):not(tspan)",
+    );
+    const texts = svg.querySelectorAll<SVGTextElement>("text.fig-draw");
+    const drawable: SVGGeometryElement[] = [];
     strokes.forEach((p) => {
-      const len = p.getTotalLength();
-      p.setAttribute("stroke-dasharray", String(len));
-      p.setAttribute("stroke-dashoffset", String(len));
+      if (typeof p.getTotalLength !== "function") return;
+      try {
+        const len = p.getTotalLength();
+        if (!Number.isFinite(len) || len <= 0) return;
+        p.setAttribute("stroke-dasharray", String(len));
+        p.setAttribute("stroke-dashoffset", String(len));
+        drawable.push(p);
+      } catch {
+        /* element can't be measured — just fade it in with the text */
+      }
     });
 
     const bars = svg.querySelectorAll<SVGRectElement>(".fig-bar");
@@ -34,12 +50,20 @@ function useDrawIn(
     });
 
     const anims = [
-      ...Array.from(strokes).map((p) =>
+      ...drawable.map((p, i) =>
         animate(p, {
           strokeDashoffset: [p.getTotalLength(), 0],
           duration: 1100,
-          delay: stagger(140),
+          delay: i * 140,
           ease: "outExpo",
+        }),
+      ),
+      ...Array.from(texts).map((t, i) =>
+        animate(t, {
+          opacity: [0, 1],
+          duration: 700,
+          delay: 300 + i * 90,
+          ease: "outQuad",
         }),
       ),
       ...Array.from(bars).map((r, i) =>

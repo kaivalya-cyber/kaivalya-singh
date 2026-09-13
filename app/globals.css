@@ -181,3 +181,31 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Prose word-cascade — compositor-only CSS animation (opacity + rise) ──
+ * Paused words hold their from-state via animation-fill-mode: both; the
+ * component flips play-state to running when the paragraph enters view.
+ * Zero per-frame JS, no filters — the JS-spring version (~600 springs)
+ * contributed to a WebKit content-process crash on project pages. */
+.prose-word {
+  display: inline-block;
+  animation: prose-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes prose-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prose-word {
+    animation: none;
+    opacity: 1;
+  }
+}

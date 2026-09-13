@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
-import { animated, useSprings, useInView } from "@react-spring/web";
+import { useInView } from "@react-spring/web";
 import { usePrefersReducedMotion } from "@/lib/motion-preferences";
 
 interface Word {
@@ -36,48 +36,36 @@ interface ProseRevealProps {
 
 /**
  * ProseReveal — a paragraph whose words rise and settle as you scroll to it.
- * Springs fire per-word with a 14ms stagger; bold spans keep their accent.
  *
- * Deliberately NO blur() in the cascade: animated CSS filters each force
- * WebKit into an offscreen buffer per element, and ~600 blurred word spans
- * on a page jetsam-kills the WebContent process (Safari shows "This page
- * couldn't load"). Opacity + transform are composite-only and safe.
+ * Pure CSS animations, not JS springs: each word carries one compositor-only
+ * animation (opacity + translateY) with a per-word animation-delay for the
+ * 14ms stagger. Paused holds the word at its from-state; flipping to
+ * `running` when the paragraph enters view plays it once. No per-frame style
+ * writes, no filters — ~600 JS springs on a page was exactly the kind of
+ * main-thread load that helped kill WebKit content processes (Safari's
+ * "This page couldn't load").
  */
 export function ProseReveal({ text, delay = 0, dropCap = false }: ProseRevealProps) {
   const reduced = usePrefersReducedMotion();
   const [ref, inView] = useInView({ rootMargin: "-10% 0px", once: true });
   const words = tokenize(text);
-  const shown = inView || reduced;
-
-  const springs = useSprings(
-    words.length,
-    words.map((_, i) => ({
-      opacity: shown ? 1 : 0,
-      y: shown ? 0 : 14,
-      config: { tension: 210, friction: 26 },
-      delay: shown ? delay + i * 14 : 0,
-    })),
-  );
+  const playing = inView && !reduced;
 
   return (
     <p ref={ref} className="leading-[1.85]">
-      {springs.map((s, i) => {
-        const word = words[i];
+      {words.map((word, i) => {
         const isFirst = i === 0;
         return (
           <Fragment key={i}>
-            <animated.span
+            <span
+              className={`prose-word ${
+                word.bold ? "font-semibold text-accent-add" : ""
+              }`}
               style={{
-                opacity: s.opacity,
-                y: s.y,
-                display: "inline-block",
-                transformOrigin: "50% 100%",
+                animationDelay: `${delay + i * 14}ms`,
+                animationPlayState: playing ? "running" : "paused",
+                ...(reduced ? { animation: "none", opacity: 1, transform: "none" } : {}),
               }}
-              className={
-                word.bold
-                  ? "font-semibold text-accent-add"
-                  : undefined
-              }
             >
               {dropCap && isFirst ? (
                 <span className="float-left mr-2 mt-1 font-display text-3xl text-accent-add">
@@ -86,7 +74,7 @@ export function ProseReveal({ text, delay = 0, dropCap = false }: ProseRevealPro
               ) : (
                 word.text
               )}
-            </animated.span>
+            </span>
             {i < words.length - 1 ? " " : ""}
           </Fragment>
         );
