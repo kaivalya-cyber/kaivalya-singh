@@ -37,6 +37,11 @@ interface ProseRevealProps {
 /**
  * ProseReveal — a paragraph whose words rise and settle as you scroll to it.
  * Springs fire per-word with a 14ms stagger; bold spans keep their accent.
+ *
+ * Deliberately NO blur() in the cascade: animated CSS filters each force
+ * WebKit into an offscreen buffer per element, and ~600 blurred word spans
+ * on a page jetsam-kills the WebContent process (Safari shows "This page
+ * couldn't load"). Opacity + transform are composite-only and safe.
  */
 export function ProseReveal({ text, delay = 0, dropCap = false }: ProseRevealProps) {
   const reduced = usePrefersReducedMotion();
@@ -49,7 +54,6 @@ export function ProseReveal({ text, delay = 0, dropCap = false }: ProseRevealPro
     words.map((_, i) => ({
       opacity: shown ? 1 : 0,
       y: shown ? 0 : 14,
-      blur: shown ? 0 : 6,
       config: { tension: 210, friction: 26 },
       delay: shown ? delay + i * 14 : 0,
     })),
@@ -66,7 +70,6 @@ export function ProseReveal({ text, delay = 0, dropCap = false }: ProseRevealPro
               style={{
                 opacity: s.opacity,
                 y: s.y,
-                filter: s.blur.to((b) => (b > 0.2 ? `blur(${b.toFixed(1)}px)` : "none")),
                 display: "inline-block",
                 transformOrigin: "50% 100%",
               }}
