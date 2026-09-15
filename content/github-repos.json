@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-14T15:42:01.535Z",
+  "fetchedAt": "2026-09-15T14:11:13.318Z",
   "repos": [
     {
       "slug": "variational-qec-decoder",
@@ -18,32 +18,7 @@
         "Python": 322524
       },
       "totalCommits": 16,
-      "totalCommits52w": 0,
-      "weeklyCommits": [],
-      "contributors": 1,
-      "lastCommit": {
-        "message": "Fix abstract class instantiation error in RepetitionCode by restoring missing get_stabiliz",
-        "date": "2026-04-20"
-      }
-    },
-    {
-      "slug": "reward-shaping-lsr",
-      "repo": "kaivalya-cyber/reward-shaping-paper",
-      "url": "https://github.com/kaivalya-cyber/reward-shaping-paper",
-      "description": "Reward Shaping for Stability in Nonlinear Dynamical Systems — PPO, LQR, and SAC agents on a triple inverted pendulum with RK4 integration, perturbation robustness tests, and phase portrait analysis",
-      "exists": true,
-      "stars": 0,
-      "forks": 0,
-      "sizeKb": 32,
-      "primaryLanguage": "Python",
-      "pushedAt": "2026-06-18",
-      "openIssues": 0,
-      "languages": {
-        "Python": 72313,
-        "Shell": 7488
-      },
-      "totalCommits": 15,
-      "totalCommits52w": 15,
+      "totalCommits52w": 16,
       "weeklyCommits": [
         0,
         0,
@@ -74,6 +49,8 @@
         0,
         0,
         0,
+        13,
+        3,
         0,
         0,
         0,
@@ -82,8 +59,6 @@
         0,
         0,
         0,
-        0,
-        15,
         0,
         0,
         0,
@@ -98,6 +73,31 @@
         0,
         0
       ],
+      "contributors": 1,
+      "lastCommit": {
+        "message": "Fix abstract class instantiation error in RepetitionCode by restoring missing get_stabiliz",
+        "date": "2026-04-20"
+      }
+    },
+    {
+      "slug": "reward-shaping-lsr",
+      "repo": "kaivalya-cyber/reward-shaping-paper",
+      "url": "https://github.com/kaivalya-cyber/reward-shaping-paper",
+      "description": "Reward Shaping for Stability in Nonlinear Dynamical Systems — PPO, LQR, and SAC agents on a triple inverted pendulum with RK4 integration, perturbation robustness tests, and phase portrait analysis",
+      "exists": true,
+      "stars": 0,
+      "forks": 0,
+      "sizeKb": 32,
+      "primaryLanguage": "Python",
+      "pushedAt": "2026-06-18",
+      "openIssues": 0,
+      "languages": {
+        "Python": 72313,
+        "Shell": 7488
+      },
+      "totalCommits": 15,
+      "totalCommits52w": 0,
+      "weeklyCommits": [],
       "contributors": 1,
       "lastCommit": {
         "message": "15: README and automated experiment runner script",
