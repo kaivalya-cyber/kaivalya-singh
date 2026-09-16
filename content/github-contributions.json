@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-15T14:11:13.153Z",
+  "fetchedAt": "2026-09-16T14:03:35.038Z",
   "calendar": {
     "days": [
       {
@@ -795,8 +795,8 @@
       },
       {
         "date": "2026-09-15",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 3
       },
       {
         "date": "2025-09-17",
@@ -1055,6 +1055,11 @@
       },
       {
         "date": "2026-09-09",
+        "level": 0,
+        "count": 0
+      },
+      {
+        "date": "2026-09-16",
         "level": 0,
         "count": 0
       },
@@ -1839,8 +1844,8 @@
         "count": 10
       }
     ],
-    "total": 761,
-    "activeDays": 91,
+    "total": 764,
+    "activeDays": 92,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1852,11 +1857,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 29,
-      "open": 4,
+      "total": 32,
+      "open": 7,
       "merged": 8,
       "closedUnmerged": 17,
       "recent": [
+        {
+          "title": "Validate axis bounds in experimental.numpy argmax and argmin",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127459",
+          "number": 127459,
+          "state": "open",
+          "date": "2026-09-16"
+        },
+        {
+          "title": "Match NumPy clip behavior when both bounds are None",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127458",
+          "number": 127458,
+          "state": "open",
+          "date": "2026-09-16"
+        },
+        {
+          "title": "Validate axis bounds in experimental.numpy flip",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127457",
+          "number": 127457,
+          "state": "open",
+          "date": "2026-09-16"
+        },
         {
           "title": "Validate axis bounds in experimental.numpy cumsum and cumprod",
           "url": "https://github.com/tensorflow/tensorflow/pull/127297",
@@ -1870,27 +1896,6 @@
           "number": 127296,
           "state": "open",
           "date": "2026-09-13"
-        },
-        {
-          "title": "Match NumPy isinf/isneginf/isposinf behavior for complex inputs",
-          "url": "https://github.com/tensorflow/tensorflow/pull/126895",
-          "number": 126895,
-          "state": "merged",
-          "date": "2026-09-10"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy roll and flip",
-          "url": "https://github.com/tensorflow/tensorflow/pull/126894",
-          "number": 126894,
-          "state": "closed",
-          "date": "2026-09-06"
-        },
-        {
-          "title": "Raise error when np.average weights sum to zero",
-          "url": "https://github.com/tensorflow/tensorflow/pull/126325",
-          "number": 126325,
-          "state": "closed",
-          "date": "2026-08-28"
         }
       ]
     },
@@ -1993,11 +1998,47 @@
       "repo": "keras-team/keras",
       "label": "Keras",
       "url": "https://github.com/keras-team/keras",
-      "total": 0,
-      "open": 0,
-      "merged": 0,
+      "total": 6,
+      "open": 3,
+      "merged": 3,
       "closedUnmerged": 0,
-      "recent": []
+      "recent": [
+        {
+          "title": "Validate Adagrad initial_accumulator_value is non-negative",
+          "url": "https://github.com/keras-team/keras/pull/23624",
+          "number": 23624,
+          "state": "open",
+          "date": "2026-09-13"
+        },
+        {
+          "title": "Validate BatchNormalization momentum is in [0, 1]",
+          "url": "https://github.com/keras-team/keras/pull/23623",
+          "number": 23623,
+          "state": "open",
+          "date": "2026-09-13"
+        },
+        {
+          "title": "Validate Huber delta is greater than 0",
+          "url": "https://github.com/keras-team/keras/pull/23573",
+          "number": 23573,
+          "state": "merged",
+          "date": "2026-09-12"
+        },
+        {
+          "title": "Accept NumPy scalar regularizer coefficients",
+          "url": "https://github.com/keras-team/keras/pull/23560",
+          "number": 23560,
+          "state": "merged",
+          "date": "2026-09-04"
+        },
+        {
+          "title": "Validate EarlyStopping patience and reset wait on improvement",
+          "url": "https://github.com/keras-team/keras/pull/23559",
+          "number": 23559,
+          "state": "merged",
+          "date": "2026-09-05"
+        }
+      ]
     }
   ]
 }
