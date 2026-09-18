@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-17T14:08:11.195Z",
+  "fetchedAt": "2026-09-18T13:25:36.251Z",
   "calendar": {
     "days": [
       {
@@ -796,7 +796,7 @@
       {
         "date": "2026-09-15",
         "level": 1,
-        "count": 3
+        "count": 5
       },
       {
         "date": "2025-09-17",
@@ -1061,7 +1061,7 @@
       {
         "date": "2026-09-16",
         "level": 1,
-        "count": 2
+        "count": 3
       },
       {
         "date": "2025-09-18",
@@ -1326,7 +1326,7 @@
       {
         "date": "2026-09-17",
         "level": 1,
-        "count": 1
+        "count": 7
       },
       {
         "date": "2025-09-19",
@@ -1589,6 +1589,11 @@
         "count": 7
       },
       {
+        "date": "2026-09-18",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-09-20",
         "level": 0,
         "count": 0
@@ -1849,7 +1854,7 @@
         "count": 10
       }
     ],
-    "total": 768,
+    "total": 777,
     "activeDays": 94,
     "bestDay": {
       "date": "2026-06-22",
@@ -1862,45 +1867,45 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 32,
+      "total": 35,
       "open": 6,
-      "merged": 9,
-      "closedUnmerged": 17,
+      "merged": 11,
+      "closedUnmerged": 18,
       "recent": [
+        {
+          "title": "Validate axis bounds in experimental.numpy stack",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127608",
+          "number": 127608,
+          "state": "open",
+          "date": "2026-09-18"
+        },
+        {
+          "title": "Validate axis bounds in experimental.numpy take",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127607",
+          "number": 127607,
+          "state": "open",
+          "date": "2026-09-18"
+        },
+        {
+          "title": "Validate axis bounds in experimental.numpy reduction functions",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127606",
+          "number": 127606,
+          "state": "open",
+          "date": "2026-09-18"
+        },
         {
           "title": "Validate axis bounds in experimental.numpy argmax and argmin",
           "url": "https://github.com/tensorflow/tensorflow/pull/127459",
           "number": 127459,
-          "state": "open",
-          "date": "2026-09-16"
+          "state": "merged",
+          "date": "2026-09-18"
         },
         {
           "title": "Match NumPy clip behavior when both bounds are None",
           "url": "https://github.com/tensorflow/tensorflow/pull/127458",
           "number": 127458,
-          "state": "open",
-          "date": "2026-09-16"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy flip",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127457",
-          "number": 127457,
-          "state": "open",
-          "date": "2026-09-16"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy cumsum and cumprod",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127297",
-          "number": 127297,
           "state": "merged",
-          "date": "2026-09-15"
-        },
-        {
-          "title": "Replace assert with ValueError for axis validation in np.compress",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127296",
-          "number": 127296,
-          "state": "merged",
-          "date": "2026-09-16"
+          "date": "2026-09-18"
         }
       ]
     },
@@ -2003,11 +2008,32 @@
       "repo": "keras-team/keras",
       "label": "Keras",
       "url": "https://github.com/keras-team/keras",
-      "total": 6,
-      "open": 3,
+      "total": 9,
+      "open": 6,
       "merged": 3,
       "closedUnmerged": 0,
       "recent": [
+        {
+          "title": "Validate Adadelta rho is in [0, 1]",
+          "url": "https://github.com/keras-team/keras/pull/23677",
+          "number": 23677,
+          "state": "open",
+          "date": "2026-09-18"
+        },
+        {
+          "title": "Validate RMSprop rho is in [0, 1]",
+          "url": "https://github.com/keras-team/keras/pull/23676",
+          "number": 23676,
+          "state": "open",
+          "date": "2026-09-18"
+        },
+        {
+          "title": "Validate GroupNormalization epsilon is positive",
+          "url": "https://github.com/keras-team/keras/pull/23675",
+          "number": 23675,
+          "state": "open",
+          "date": "2026-09-18"
+        },
         {
           "title": "Validate Adagrad initial_accumulator_value is non-negative",
           "url": "https://github.com/keras-team/keras/pull/23624",
@@ -2021,27 +2047,6 @@
           "number": 23623,
           "state": "open",
           "date": "2026-09-13"
-        },
-        {
-          "title": "Validate Huber delta is greater than 0",
-          "url": "https://github.com/keras-team/keras/pull/23573",
-          "number": 23573,
-          "state": "merged",
-          "date": "2026-09-12"
-        },
-        {
-          "title": "Accept NumPy scalar regularizer coefficients",
-          "url": "https://github.com/keras-team/keras/pull/23560",
-          "number": 23560,
-          "state": "merged",
-          "date": "2026-09-04"
-        },
-        {
-          "title": "Validate EarlyStopping patience and reset wait on improvement",
-          "url": "https://github.com/keras-team/keras/pull/23559",
-          "number": 23559,
-          "state": "merged",
-          "date": "2026-09-05"
         }
       ]
     }
