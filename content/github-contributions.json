@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-18T13:25:36.251Z",
+  "fetchedAt": "2026-09-19T12:54:40.221Z",
   "calendar": {
     "days": [
       {
@@ -1590,8 +1590,8 @@
       },
       {
         "date": "2026-09-18",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 3
       },
       {
         "date": "2025-09-20",
@@ -1852,10 +1852,15 @@
         "date": "2026-09-12",
         "level": 1,
         "count": 10
+      },
+      {
+        "date": "2026-09-19",
+        "level": 0,
+        "count": 0
       }
     ],
-    "total": 777,
-    "activeDays": 94,
+    "total": 780,
+    "activeDays": 95,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1867,11 +1872,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 35,
-      "open": 6,
+      "total": 38,
+      "open": 9,
       "merged": 11,
       "closedUnmerged": 18,
       "recent": [
+        {
+          "title": "Validate axis bounds in experimental.numpy.split",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127684",
+          "number": 127684,
+          "state": "open",
+          "date": "2026-09-19"
+        },
+        {
+          "title": "Validate axes in experimental.numpy.rot90",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127683",
+          "number": 127683,
+          "state": "open",
+          "date": "2026-09-19"
+        },
+        {
+          "title": "Validate axis bounds in tf.linalg.norm",
+          "url": "https://github.com/tensorflow/tensorflow/pull/127682",
+          "number": 127682,
+          "state": "open",
+          "date": "2026-09-19"
+        },
         {
           "title": "Validate axis bounds in experimental.numpy stack",
           "url": "https://github.com/tensorflow/tensorflow/pull/127608",
@@ -1884,27 +1910,6 @@
           "url": "https://github.com/tensorflow/tensorflow/pull/127607",
           "number": 127607,
           "state": "open",
-          "date": "2026-09-18"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy reduction functions",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127606",
-          "number": 127606,
-          "state": "open",
-          "date": "2026-09-18"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy argmax and argmin",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127459",
-          "number": 127459,
-          "state": "merged",
-          "date": "2026-09-18"
-        },
-        {
-          "title": "Match NumPy clip behavior when both bounds are None",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127458",
-          "number": 127458,
-          "state": "merged",
           "date": "2026-09-18"
         }
       ]
