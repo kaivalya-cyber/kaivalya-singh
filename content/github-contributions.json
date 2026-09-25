@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-24T14:03:25.258Z",
+  "fetchedAt": "2026-09-25T14:26:44.939Z",
   "calendar": {
     "days": [
       {
@@ -1589,6 +1589,11 @@
         "count": 5
       },
       {
+        "date": "2026-09-25",
+        "level": 1,
+        "count": 3
+      },
+      {
         "date": "2025-09-27",
         "level": 0,
         "count": 0
@@ -1849,8 +1854,8 @@
         "count": 0
       }
     ],
-    "total": 788,
-    "activeDays": 97,
+    "total": 791,
+    "activeDays": 98,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1863,9 +1868,9 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 38,
-      "open": 7,
+      "open": 5,
       "merged": 13,
-      "closedUnmerged": 18,
+      "closedUnmerged": 20,
       "recent": [
         {
           "title": "Validate axis bounds in experimental.numpy.split",
@@ -1899,7 +1904,7 @@
           "title": "Validate axis bounds in experimental.numpy take",
           "url": "https://github.com/tensorflow/tensorflow/pull/127607",
           "number": 127607,
-          "state": "open",
+          "state": "closed",
           "date": "2026-09-18"
         }
       ]
