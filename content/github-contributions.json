@@ -1,13 +1,8 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-26T13:37:59.555Z",
+  "fetchedAt": "2026-09-27T14:34:22.671Z",
   "calendar": {
     "days": [
-      {
-        "date": "2025-09-21",
-        "level": 0,
-        "count": 0
-      },
       {
         "date": "2025-09-28",
         "level": 0,
@@ -269,7 +264,7 @@
         "count": 0
       },
       {
-        "date": "2025-09-22",
+        "date": "2026-09-27",
         "level": 0,
         "count": 0
       },
@@ -534,11 +529,6 @@
         "count": 3
       },
       {
-        "date": "2025-09-23",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-09-30",
         "level": 0,
         "count": 0
@@ -799,11 +789,6 @@
         "count": 1
       },
       {
-        "date": "2025-09-24",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-10-01",
         "level": 0,
         "count": 0
@@ -1060,11 +1045,6 @@
       },
       {
         "date": "2026-09-23",
-        "level": 0,
-        "count": 0
-      },
-      {
-        "date": "2025-09-25",
         "level": 0,
         "count": 0
       },
@@ -1329,11 +1309,6 @@
         "count": 0
       },
       {
-        "date": "2025-09-26",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-10-03",
         "level": 0,
         "count": 0
@@ -1594,11 +1569,6 @@
         "count": 8
       },
       {
-        "date": "2025-09-27",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-10-04",
         "level": 0,
         "count": 0
@@ -1855,12 +1825,12 @@
       },
       {
         "date": "2026-09-26",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 3
       }
     ],
-    "total": 796,
-    "activeDays": 98,
+    "total": 799,
+    "activeDays": 99,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1872,11 +1842,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 38,
-      "open": 5,
+      "total": 41,
+      "open": 8,
       "merged": 13,
       "closedUnmerged": 20,
       "recent": [
+        {
+          "title": "Validate axes in experimental.numpy transpose",
+          "url": "https://github.com/tensorflow/tensorflow/pull/128143",
+          "number": 128143,
+          "state": "open",
+          "date": "2026-09-27"
+        },
+        {
+          "title": "Validate axis bounds in experimental.numpy squeeze",
+          "url": "https://github.com/tensorflow/tensorflow/pull/128142",
+          "number": 128142,
+          "state": "open",
+          "date": "2026-09-27"
+        },
+        {
+          "title": "Validate axis bounds in experimental.numpy expand_dims",
+          "url": "https://github.com/tensorflow/tensorflow/pull/128141",
+          "number": 128141,
+          "state": "open",
+          "date": "2026-09-27"
+        },
         {
           "title": "Validate axis bounds in experimental.numpy.split",
           "url": "https://github.com/tensorflow/tensorflow/pull/127684",
@@ -1890,27 +1881,6 @@
           "number": 127683,
           "state": "open",
           "date": "2026-09-19"
-        },
-        {
-          "title": "Validate axis bounds in tf.linalg.norm",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127682",
-          "number": 127682,
-          "state": "merged",
-          "date": "2026-09-24"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy stack",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127608",
-          "number": 127608,
-          "state": "merged",
-          "date": "2026-09-24"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy take",
-          "url": "https://github.com/tensorflow/tensorflow/pull/127607",
-          "number": 127607,
-          "state": "closed",
-          "date": "2026-09-18"
         }
       ]
     },
