@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-09-29T15:24:43.759Z",
+  "fetchedAt": "2026-09-30T15:40:55.164Z",
   "calendar": {
     "days": [
       {
@@ -1059,6 +1059,11 @@
         "count": 0
       },
       {
+        "date": "2026-09-30",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-10-02",
         "level": 0,
         "count": 0
@@ -1853,16 +1858,16 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 41,
-      "open": 6,
-      "merged": 14,
+      "open": 4,
+      "merged": 16,
       "closedUnmerged": 21,
       "recent": [
         {
           "title": "Validate axes in experimental.numpy transpose",
           "url": "https://github.com/tensorflow/tensorflow/pull/128143",
           "number": 128143,
-          "state": "open",
-          "date": "2026-09-27"
+          "state": "merged",
+          "date": "2026-09-30"
         },
         {
           "title": "Validate axis bounds in experimental.numpy squeeze",
@@ -1889,8 +1894,8 @@
           "title": "Validate axes in experimental.numpy.rot90",
           "url": "https://github.com/tensorflow/tensorflow/pull/127683",
           "number": 127683,
-          "state": "open",
-          "date": "2026-09-19"
+          "state": "merged",
+          "date": "2026-09-30"
         }
       ]
     },
