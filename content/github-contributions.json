@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-15T13:59:18.801Z",
+  "fetchedAt": "2026-10-16T13:46:09.598Z",
   "calendar": {
     "days": [
       {
@@ -1325,8 +1325,8 @@
       },
       {
         "date": "2026-10-15",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 7
       },
       {
         "date": "2025-10-17",
@@ -1589,6 +1589,11 @@
         "count": 1
       },
       {
+        "date": "2026-10-16",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-10-18",
         "level": 0,
         "count": 0
@@ -1849,8 +1854,8 @@
         "count": 0
       }
     ],
-    "total": 862,
-    "activeDays": 113,
+    "total": 869,
+    "activeDays": 114,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1862,11 +1867,18 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 44,
-      "open": 0,
+      "total": 45,
+      "open": 1,
       "merged": 22,
       "closedUnmerged": 22,
       "recent": [
+        {
+          "title": "Fix memory leak in (*SessionOptions).c() when TF_SetConfig rejects the Config (#129133)",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129165",
+          "number": 129165,
+          "state": "open",
+          "date": "2026-10-16"
+        },
         {
           "title": "Validate axis bounds in experimental.numpy average",
           "url": "https://github.com/tensorflow/tensorflow/pull/128462",
@@ -1894,13 +1906,6 @@
           "number": 128143,
           "state": "merged",
           "date": "2026-09-30"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy squeeze",
-          "url": "https://github.com/tensorflow/tensorflow/pull/128142",
-          "number": 128142,
-          "state": "closed",
-          "date": "2026-09-27"
         }
       ]
     },
@@ -1909,11 +1914,32 @@
       "repo": "pytorch/pytorch",
       "label": "PyTorch",
       "url": "https://github.com/pytorch/pytorch",
-      "total": 11,
-      "open": 6,
+      "total": 14,
+      "open": 9,
       "merged": 0,
       "closedUnmerged": 5,
       "recent": [
+        {
+          "title": "tnp.arange(start=...) without stop now raises TypeError like NumPy (#194866)",
+          "url": "https://github.com/pytorch/pytorch/pull/201147",
+          "number": 201147,
+          "state": "open",
+          "date": "2026-10-16"
+        },
+        {
+          "title": "tnp.geomspace: fix num=1 ZeroDivisionError, forward dtype (#195978)",
+          "url": "https://github.com/pytorch/pytorch/pull/201146",
+          "number": 201146,
+          "state": "open",
+          "date": "2026-10-16"
+        },
+        {
+          "title": "Validate size > 0 in LocalResponseNorm (module + functional)",
+          "url": "https://github.com/pytorch/pytorch/pull/201145",
+          "number": 201145,
+          "state": "open",
+          "date": "2026-10-16"
+        },
         {
           "title": "Fix/threshold inplace validation",
           "url": "https://github.com/pytorch/pytorch/pull/188532",
@@ -1925,27 +1951,6 @@
           "title": "Fix/180346 dtensor clip grad mixed mesh",
           "url": "https://github.com/pytorch/pytorch/pull/188517",
           "number": 188517,
-          "state": "open",
-          "date": "2026-06-30"
-        },
-        {
-          "title": "Fix/187177 localresponsenorm validation",
-          "url": "https://github.com/pytorch/pytorch/pull/188516",
-          "number": 188516,
-          "state": "open",
-          "date": "2026-06-30"
-        },
-        {
-          "title": "Fix/188034 autograd setup context leak",
-          "url": "https://github.com/pytorch/pytorch/pull/188502",
-          "number": 188502,
-          "state": "open",
-          "date": "2026-06-30"
-        },
-        {
-          "title": "Fix/147170 deterministic partition ordering",
-          "url": "https://github.com/pytorch/pytorch/pull/188501",
-          "number": 188501,
           "state": "open",
           "date": "2026-06-30"
         }
@@ -2003,11 +2008,32 @@
       "repo": "keras-team/keras",
       "label": "Keras",
       "url": "https://github.com/keras-team/keras",
-      "total": 9,
-      "open": 0,
+      "total": 12,
+      "open": 3,
       "merged": 9,
       "closedUnmerged": 0,
       "recent": [
+        {
+          "title": "Add shape validation to legacy binary_crossentropy",
+          "url": "https://github.com/keras-team/keras/pull/23974",
+          "number": 23974,
+          "state": "open",
+          "date": "2026-10-16"
+        },
+        {
+          "title": "Don't truncate integer/bool inputs in rms_normalization and layer_normalization (#23708)",
+          "url": "https://github.com/keras-team/keras/pull/23972",
+          "number": 23972,
+          "state": "open",
+          "date": "2026-10-16"
+        },
+        {
+          "title": "Fix weak dtype resolution under a bfloat16 floatx (#23712)",
+          "url": "https://github.com/keras-team/keras/pull/23971",
+          "number": 23971,
+          "state": "open",
+          "date": "2026-10-16"
+        },
         {
           "title": "Validate Adadelta rho is in [0, 1]",
           "url": "https://github.com/keras-team/keras/pull/23677",
@@ -2021,27 +2047,6 @@
           "number": 23676,
           "state": "merged",
           "date": "2026-10-07"
-        },
-        {
-          "title": "Validate GroupNormalization epsilon is positive",
-          "url": "https://github.com/keras-team/keras/pull/23675",
-          "number": 23675,
-          "state": "merged",
-          "date": "2026-10-06"
-        },
-        {
-          "title": "Validate Adagrad initial_accumulator_value is non-negative",
-          "url": "https://github.com/keras-team/keras/pull/23624",
-          "number": 23624,
-          "state": "merged",
-          "date": "2026-10-06"
-        },
-        {
-          "title": "Validate BatchNormalization momentum is in [0, 1]",
-          "url": "https://github.com/keras-team/keras/pull/23623",
-          "number": 23623,
-          "state": "merged",
-          "date": "2026-10-06"
         }
       ]
     }
