@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-16T13:46:09.598Z",
+  "fetchedAt": "2026-10-17T12:43:19.679Z",
   "calendar": {
     "days": [
       {
@@ -1590,8 +1590,8 @@
       },
       {
         "date": "2026-10-16",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 4
       },
       {
         "date": "2025-10-18",
@@ -1852,10 +1852,15 @@
         "date": "2026-10-10",
         "level": 0,
         "count": 0
+      },
+      {
+        "date": "2026-10-17",
+        "level": 0,
+        "count": 0
       }
     ],
-    "total": 869,
-    "activeDays": 114,
+    "total": 873,
+    "activeDays": 115,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1868,15 +1873,15 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 45,
-      "open": 1,
+      "open": 0,
       "merged": 22,
-      "closedUnmerged": 22,
+      "closedUnmerged": 23,
       "recent": [
         {
           "title": "Fix memory leak in (*SessionOptions).c() when TF_SetConfig rejects the Config (#129133)",
           "url": "https://github.com/tensorflow/tensorflow/pull/129165",
           "number": 129165,
-          "state": "open",
+          "state": "closed",
           "date": "2026-10-16"
         },
         {
