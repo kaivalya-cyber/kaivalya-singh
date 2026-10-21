@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-20T14:08:18.690Z",
+  "fetchedAt": "2026-10-21T14:21:56.731Z",
   "calendar": {
     "days": [
       {
@@ -250,8 +250,8 @@
       },
       {
         "date": "2026-09-27",
-        "level": 1,
-        "count": 1
+        "level": 0,
+        "count": 0
       },
       {
         "date": "2026-10-04",
@@ -511,7 +511,7 @@
       {
         "date": "2026-09-21",
         "level": 1,
-        "count": 4
+        "count": 2
       },
       {
         "date": "2026-09-28",
@@ -775,8 +775,8 @@
       },
       {
         "date": "2026-09-22",
-        "level": 1,
-        "count": 1
+        "level": 0,
+        "count": 0
       },
       {
         "date": "2026-09-29",
@@ -795,8 +795,8 @@
       },
       {
         "date": "2026-10-20",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 4
       },
       {
         "date": "2025-10-22",
@@ -1036,7 +1036,7 @@
       {
         "date": "2026-09-16",
         "level": 1,
-        "count": 4
+        "count": 3
       },
       {
         "date": "2026-09-23",
@@ -1057,6 +1057,11 @@
         "date": "2026-10-14",
         "level": 1,
         "count": 1
+      },
+      {
+        "date": "2026-10-21",
+        "level": 0,
+        "count": 0
       },
       {
         "date": "2025-10-23",
@@ -1561,7 +1566,7 @@
       {
         "date": "2026-09-25",
         "level": 1,
-        "count": 8
+        "count": 1
       },
       {
         "date": "2026-10-02",
@@ -1839,8 +1844,8 @@
         "count": 14
       }
     ],
-    "total": 887,
-    "activeDays": 116,
+    "total": 879,
+    "activeDays": 115,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1852,11 +1857,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 45,
-      "open": 0,
+      "total": 48,
+      "open": 3,
       "merged": 22,
       "closedUnmerged": 23,
       "recent": [
+        {
+          "title": "Fix `linspace`/`logspace`/`geomspace` destination-axis validation with NumPy-style AxisError messages",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129380",
+          "number": 129380,
+          "state": "open",
+          "date": "2026-10-21"
+        },
+        {
+          "title": "Fix `tf.experimental.numpy.ptp` axis-bound validation with NumPy-style AxisError messages",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129379",
+          "number": 129379,
+          "state": "open",
+          "date": "2026-10-21"
+        },
+        {
+          "title": "Fix `tf.experimental.numpy.cross` axis-bound validation with NumPy-style AxisError messages",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129378",
+          "number": 129378,
+          "state": "open",
+          "date": "2026-10-21"
+        },
         {
           "title": "Fix memory leak in (*SessionOptions).c() when TF_SetConfig rejects the Config (#129133)",
           "url": "https://github.com/tensorflow/tensorflow/pull/129165",
@@ -1870,27 +1896,6 @@
           "number": 128462,
           "state": "merged",
           "date": "2026-10-08"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy roll",
-          "url": "https://github.com/tensorflow/tensorflow/pull/128461",
-          "number": 128461,
-          "state": "merged",
-          "date": "2026-10-15"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy flip",
-          "url": "https://github.com/tensorflow/tensorflow/pull/128460",
-          "number": 128460,
-          "state": "merged",
-          "date": "2026-10-13"
-        },
-        {
-          "title": "Validate axes in experimental.numpy transpose",
-          "url": "https://github.com/tensorflow/tensorflow/pull/128143",
-          "number": 128143,
-          "state": "merged",
-          "date": "2026-09-30"
         }
       ]
     },
