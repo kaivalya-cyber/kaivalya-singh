@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-22T14:22:49.132Z",
+  "fetchedAt": "2026-10-23T14:05:14.978Z",
   "calendar": {
     "days": [
       {
@@ -1589,6 +1589,11 @@
         "count": 4
       },
       {
+        "date": "2026-10-23",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-10-25",
         "level": 0,
         "count": 0
@@ -1875,7 +1880,7 @@
           "date": "2026-10-21"
         },
         {
-          "title": "Fix `tf.experimental.numpy.ptp` axis-bound validation with NumPy-style AxisError messages",
+          "title": "Add `tf.experimental.numpy.ptp` axis-validation regression tests (validation already in `_reduce`)",
           "url": "https://github.com/tensorflow/tensorflow/pull/129379",
           "number": 129379,
           "state": "open",
