@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-25T13:35:02.790Z",
+  "fetchedAt": "2026-10-26T15:53:28.804Z",
   "calendar": {
     "days": [
       {
@@ -265,8 +265,8 @@
       },
       {
         "date": "2026-10-25",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 3
       },
       {
         "date": "2025-10-27",
@@ -529,6 +529,11 @@
         "count": 3
       },
       {
+        "date": "2026-10-26",
+        "level": 1,
+        "count": 2
+      },
+      {
         "date": "2025-10-28",
         "level": 0,
         "count": 0
@@ -786,7 +791,7 @@
       {
         "date": "2026-10-20",
         "level": 1,
-        "count": 4
+        "count": 5
       },
       {
         "date": "2025-10-29",
@@ -1305,8 +1310,8 @@
       },
       {
         "date": "2026-10-22",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 1
       },
       {
         "date": "2025-10-31",
@@ -1565,8 +1570,8 @@
       },
       {
         "date": "2026-10-23",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 2
       },
       {
         "date": "2025-11-01",
@@ -1829,8 +1834,8 @@
         "count": 0
       }
     ],
-    "total": 880,
-    "activeDays": 116,
+    "total": 889,
+    "activeDays": 120,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1842,17 +1847,38 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 48,
-      "open": 3,
-      "merged": 22,
+      "total": 51,
+      "open": 5,
+      "merged": 23,
       "closedUnmerged": 23,
       "recent": [
+        {
+          "title": "Fix `diagonal`/`trace` rank<2 and same-axis error parity with NumPy",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129534",
+          "number": 129534,
+          "state": "open",
+          "date": "2026-10-26"
+        },
+        {
+          "title": "Align `pad` `pad_width` semantics with NumPy (broadcast + integral check)",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129533",
+          "number": 129533,
+          "state": "open",
+          "date": "2026-10-26"
+        },
+        {
+          "title": "Fix `tensordot` `axes` bounds validation with a descriptive error",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129532",
+          "number": 129532,
+          "state": "open",
+          "date": "2026-10-26"
+        },
         {
           "title": "Fix `linspace`/`logspace`/`geomspace` destination-axis validation with NumPy-style AxisError messages",
           "url": "https://github.com/tensorflow/tensorflow/pull/129380",
           "number": 129380,
-          "state": "open",
-          "date": "2026-10-21"
+          "state": "merged",
+          "date": "2026-10-26"
         },
         {
           "title": "Add `tf.experimental.numpy.ptp` axis-validation regression tests (validation already in `_reduce`)",
@@ -1860,27 +1886,6 @@
           "number": 129379,
           "state": "open",
           "date": "2026-10-21"
-        },
-        {
-          "title": "Fix `tf.experimental.numpy.cross` axis-bound validation with NumPy-style AxisError messages",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129378",
-          "number": 129378,
-          "state": "open",
-          "date": "2026-10-21"
-        },
-        {
-          "title": "Fix memory leak in (*SessionOptions).c() when TF_SetConfig rejects the Config (#129133)",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129165",
-          "number": 129165,
-          "state": "closed",
-          "date": "2026-10-16"
-        },
-        {
-          "title": "Validate axis bounds in experimental.numpy average",
-          "url": "https://github.com/tensorflow/tensorflow/pull/128462",
-          "number": 128462,
-          "state": "merged",
-          "date": "2026-10-08"
         }
       ]
     },
