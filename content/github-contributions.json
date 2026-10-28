@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-27T15:09:33.165Z",
+  "fetchedAt": "2026-10-28T15:45:24.626Z",
   "calendar": {
     "days": [
       {
@@ -1059,6 +1059,11 @@
         "count": 1
       },
       {
+        "date": "2026-10-28",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-10-30",
         "level": 0,
         "count": 0
@@ -1853,15 +1858,15 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 51,
-      "open": 5,
+      "open": 4,
       "merged": 23,
-      "closedUnmerged": 23,
+      "closedUnmerged": 24,
       "recent": [
         {
           "title": "Fix `diagonal`/`trace` rank<2 and same-axis error parity with NumPy",
           "url": "https://github.com/tensorflow/tensorflow/pull/129534",
           "number": 129534,
-          "state": "open",
+          "state": "closed",
           "date": "2026-10-26"
         },
         {
