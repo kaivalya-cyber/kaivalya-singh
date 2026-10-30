@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-10-29T15:52:56.399Z",
+  "fetchedAt": "2026-10-30T15:35:37.441Z",
   "calendar": {
     "days": [
       {
@@ -1325,8 +1325,8 @@
       },
       {
         "date": "2026-10-29",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 3
       },
       {
         "date": "2025-10-31",
@@ -1589,6 +1589,11 @@
         "count": 2
       },
       {
+        "date": "2026-10-30",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-11-01",
         "level": 0,
         "count": 0
@@ -1849,8 +1854,8 @@
         "count": 0
       }
     ],
-    "total": 889,
-    "activeDays": 120,
+    "total": 892,
+    "activeDays": 121,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1862,11 +1867,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 51,
-      "open": 4,
+      "total": 54,
+      "open": 7,
       "merged": 23,
       "closedUnmerged": 24,
       "recent": [
+        {
+          "title": "Fix tf.experimental.numpy repeat negative-repeats validation with NumPy's ValueError",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129735",
+          "number": 129735,
+          "state": "open",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "Add tf.experimental.numpy diff prepend/append support with NumPy semantics",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129734",
+          "number": 129734,
+          "state": "open",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "Fix tf.experimental.numpy flipud/fliplr rank validation with NumPy's ValueError",
+          "url": "https://github.com/tensorflow/tensorflow/pull/129733",
+          "number": 129733,
+          "state": "open",
+          "date": "2026-10-30"
+        },
         {
           "title": "Fix `diagonal`/`trace` rank<2 and same-axis error parity with NumPy",
           "url": "https://github.com/tensorflow/tensorflow/pull/129534",
@@ -1880,27 +1906,6 @@
           "number": 129533,
           "state": "open",
           "date": "2026-10-26"
-        },
-        {
-          "title": "Fix `tensordot` `axes` bounds validation with a descriptive error",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129532",
-          "number": 129532,
-          "state": "open",
-          "date": "2026-10-26"
-        },
-        {
-          "title": "Fix `linspace`/`logspace`/`geomspace` destination-axis validation with NumPy-style AxisError messages",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129380",
-          "number": 129380,
-          "state": "merged",
-          "date": "2026-10-26"
-        },
-        {
-          "title": "Add `tf.experimental.numpy.ptp` axis-validation regression tests (validation already in `_reduce`)",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129379",
-          "number": 129379,
-          "state": "open",
-          "date": "2026-10-21"
         }
       ]
     },
