@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-11-10T16:48:35.249Z",
+  "fetchedAt": "2026-11-11T16:54:58.599Z",
   "calendar": {
     "days": [
       {
@@ -1059,6 +1059,11 @@
         "count": 0
       },
       {
+        "date": "2026-11-11",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-11-13",
         "level": 0,
         "count": 0
@@ -1994,15 +1999,15 @@
       "label": "Keras",
       "url": "https://github.com/keras-team/keras",
       "total": 12,
-      "open": 3,
+      "open": 2,
       "merged": 9,
-      "closedUnmerged": 0,
+      "closedUnmerged": 1,
       "recent": [
         {
           "title": "Add shape validation to legacy binary_crossentropy",
           "url": "https://github.com/keras-team/keras/pull/23974",
           "number": 23974,
-          "state": "open",
+          "state": "closed",
           "date": "2026-10-16"
         },
         {
