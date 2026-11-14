@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-11-13T16:57:51.008Z",
+  "fetchedAt": "2026-11-14T15:35:54.889Z",
   "calendar": {
     "days": [
       {
@@ -1850,6 +1850,11 @@
       },
       {
         "date": "2026-11-07",
+        "level": 0,
+        "count": 0
+      },
+      {
+        "date": "2026-11-14",
         "level": 0,
         "count": 0
       }
