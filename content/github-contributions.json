@@ -1,13 +1,8 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-11-14T15:35:54.889Z",
+  "fetchedAt": "2026-11-15T16:06:02.725Z",
   "calendar": {
     "days": [
-      {
-        "date": "2025-11-09",
-        "level": 0,
-        "count": 0
-      },
       {
         "date": "2025-11-16",
         "level": 0,
@@ -269,7 +264,7 @@
         "count": 0
       },
       {
-        "date": "2025-11-10",
+        "date": "2026-11-15",
         "level": 0,
         "count": 0
       },
@@ -534,11 +529,6 @@
         "count": 3
       },
       {
-        "date": "2025-11-11",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-11-18",
         "level": 0,
         "count": 0
@@ -795,11 +785,6 @@
       },
       {
         "date": "2026-11-10",
-        "level": 0,
-        "count": 0
-      },
-      {
-        "date": "2025-11-12",
         "level": 0,
         "count": 0
       },
@@ -1064,11 +1049,6 @@
         "count": 0
       },
       {
-        "date": "2025-11-13",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-11-20",
         "level": 0,
         "count": 0
@@ -1325,11 +1305,6 @@
       },
       {
         "date": "2026-11-12",
-        "level": 0,
-        "count": 0
-      },
-      {
-        "date": "2025-11-14",
         "level": 0,
         "count": 0
       },
@@ -1594,11 +1569,6 @@
         "count": 0
       },
       {
-        "date": "2025-11-15",
-        "level": 0,
-        "count": 0
-      },
-      {
         "date": "2025-11-22",
         "level": 0,
         "count": 0
@@ -1855,12 +1825,12 @@
       },
       {
         "date": "2026-11-14",
-        "level": 0,
-        "count": 0
+        "level": 1,
+        "count": 3
       }
     ],
-    "total": 944,
-    "activeDays": 129,
+    "total": 947,
+    "activeDays": 130,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1872,11 +1842,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 54,
-      "open": 3,
+      "total": 57,
+      "open": 6,
       "merged": 27,
       "closedUnmerged": 24,
       "recent": [
+        {
+          "title": "Add `keepdims` to `tf.experimental.numpy.argmax`/`argmin`",
+          "url": "https://github.com/tensorflow/tensorflow/pull/130351",
+          "number": 130351,
+          "state": "open",
+          "date": "2026-11-14"
+        },
+        {
+          "title": "Support `shape` in `tf.experimental.numpy.*_like` constructors",
+          "url": "https://github.com/tensorflow/tensorflow/pull/130350",
+          "number": 130350,
+          "state": "open",
+          "date": "2026-11-14"
+        },
+        {
+          "title": "Add `ddof` support to `tf.experimental.numpy.std`",
+          "url": "https://github.com/tensorflow/tensorflow/pull/130349",
+          "number": 130349,
+          "state": "open",
+          "date": "2026-11-14"
+        },
         {
           "title": "Fix tf.experimental.numpy repeat negative-repeats validation with NumPy's ValueError",
           "url": "https://github.com/tensorflow/tensorflow/pull/129735",
@@ -1890,27 +1881,6 @@
           "number": 129734,
           "state": "open",
           "date": "2026-10-30"
-        },
-        {
-          "title": "Fix tf.experimental.numpy flipud/fliplr rank validation with NumPy's ValueError",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129733",
-          "number": 129733,
-          "state": "merged",
-          "date": "2026-11-09"
-        },
-        {
-          "title": "Fix `diagonal`/`trace` rank<2 and same-axis error parity with NumPy",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129534",
-          "number": 129534,
-          "state": "closed",
-          "date": "2026-10-26"
-        },
-        {
-          "title": "Align `pad` `pad_width` semantics with NumPy (broadcast + integral check)",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129533",
-          "number": 129533,
-          "state": "merged",
-          "date": "2026-11-09"
         }
       ]
     },
