@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-11-16T19:18:29.967Z",
+  "fetchedAt": "2026-11-17T18:12:04.731Z",
   "calendar": {
     "days": [
       {
@@ -526,7 +526,7 @@
       {
         "date": "2026-11-09",
         "level": 1,
-        "count": 3
+        "count": 4
       },
       {
         "date": "2026-11-16",
@@ -792,6 +792,11 @@
         "date": "2026-11-10",
         "level": 0,
         "count": 0
+      },
+      {
+        "date": "2026-11-17",
+        "level": 1,
+        "count": 3
       },
       {
         "date": "2025-11-19",
@@ -1301,12 +1306,12 @@
       {
         "date": "2026-10-29",
         "level": 1,
-        "count": 12
+        "count": 13
       },
       {
         "date": "2026-11-05",
         "level": 1,
-        "count": 4
+        "count": 5
       },
       {
         "date": "2026-11-12",
@@ -1831,11 +1836,11 @@
       {
         "date": "2026-11-14",
         "level": 1,
-        "count": 3
+        "count": 4
       }
     ],
-    "total": 947,
-    "activeDays": 130,
+    "total": 954,
+    "activeDays": 131,
     "bestDay": {
       "date": "2026-06-22",
       "count": 67
@@ -1847,11 +1852,32 @@
       "repo": "tensorflow/tensorflow",
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
-      "total": 57,
-      "open": 6,
-      "merged": 27,
+      "total": 60,
+      "open": 8,
+      "merged": 28,
       "closedUnmerged": 24,
       "recent": [
+        {
+          "title": "Add `keepdims` to `tf.experimental.numpy.average`",
+          "url": "https://github.com/tensorflow/tensorflow/pull/130452",
+          "number": 130452,
+          "state": "open",
+          "date": "2026-11-17"
+        },
+        {
+          "title": "Add `tf.experimental.numpy.searchsorted`",
+          "url": "https://github.com/tensorflow/tensorflow/pull/130451",
+          "number": 130451,
+          "state": "open",
+          "date": "2026-11-17"
+        },
+        {
+          "title": "Support `initial` and `where` in `tf.experimental.numpy.sum`/`prod`",
+          "url": "https://github.com/tensorflow/tensorflow/pull/130450",
+          "number": 130450,
+          "state": "open",
+          "date": "2026-11-17"
+        },
         {
           "title": "Add `keepdims` to `tf.experimental.numpy.argmax`/`argmin`",
           "url": "https://github.com/tensorflow/tensorflow/pull/130351",
@@ -1865,27 +1891,6 @@
           "number": 130350,
           "state": "open",
           "date": "2026-11-14"
-        },
-        {
-          "title": "Add `ddof` support to `tf.experimental.numpy.std`",
-          "url": "https://github.com/tensorflow/tensorflow/pull/130349",
-          "number": 130349,
-          "state": "open",
-          "date": "2026-11-14"
-        },
-        {
-          "title": "Fix tf.experimental.numpy repeat negative-repeats validation with NumPy's ValueError",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129735",
-          "number": 129735,
-          "state": "merged",
-          "date": "2026-11-09"
-        },
-        {
-          "title": "Add tf.experimental.numpy diff prepend/append support with NumPy semantics",
-          "url": "https://github.com/tensorflow/tensorflow/pull/129734",
-          "number": 129734,
-          "state": "open",
-          "date": "2026-10-30"
         }
       ]
     },
