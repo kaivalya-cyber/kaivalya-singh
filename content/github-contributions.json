@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-11-24T19:58:07.954Z",
+  "fetchedAt": "2026-11-25T18:59:19.570Z",
   "calendar": {
     "days": [
       {
@@ -1059,6 +1059,11 @@
         "count": 0
       },
       {
+        "date": "2026-11-25",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-11-27",
         "level": 0,
         "count": 0
@@ -1853,29 +1858,29 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 60,
-      "open": 8,
+      "open": 4,
       "merged": 28,
-      "closedUnmerged": 24,
+      "closedUnmerged": 28,
       "recent": [
         {
           "title": "Add `keepdims` to `tf.experimental.numpy.average`",
           "url": "https://github.com/tensorflow/tensorflow/pull/130452",
           "number": 130452,
-          "state": "open",
+          "state": "closed",
           "date": "2026-11-17"
         },
         {
           "title": "Add `tf.experimental.numpy.searchsorted`",
           "url": "https://github.com/tensorflow/tensorflow/pull/130451",
           "number": 130451,
-          "state": "open",
+          "state": "closed",
           "date": "2026-11-17"
         },
         {
           "title": "Support `initial` and `where` in `tf.experimental.numpy.sum`/`prod`",
           "url": "https://github.com/tensorflow/tensorflow/pull/130450",
           "number": 130450,
-          "state": "open",
+          "state": "closed",
           "date": "2026-11-17"
         },
         {
