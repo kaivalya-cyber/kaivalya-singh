@@ -1,6 +1,6 @@
 {
   "user": "kaivalya-cyber",
-  "fetchedAt": "2026-11-25T18:59:19.570Z",
+  "fetchedAt": "2026-11-26T18:50:59.852Z",
   "calendar": {
     "days": [
       {
@@ -1324,6 +1324,11 @@
         "count": 0
       },
       {
+        "date": "2026-11-26",
+        "level": 0,
+        "count": 0
+      },
+      {
         "date": "2025-11-28",
         "level": 0,
         "count": 0
@@ -1858,9 +1863,9 @@
       "label": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow",
       "total": 60,
-      "open": 4,
+      "open": 0,
       "merged": 28,
-      "closedUnmerged": 28,
+      "closedUnmerged": 32,
       "recent": [
         {
           "title": "Add `keepdims` to `tf.experimental.numpy.average`",
@@ -1887,14 +1892,14 @@
           "title": "Add `keepdims` to `tf.experimental.numpy.argmax`/`argmin`",
           "url": "https://github.com/tensorflow/tensorflow/pull/130351",
           "number": 130351,
-          "state": "open",
+          "state": "closed",
           "date": "2026-11-14"
         },
         {
           "title": "Support `shape` in `tf.experimental.numpy.*_like` constructors",
           "url": "https://github.com/tensorflow/tensorflow/pull/130350",
           "number": 130350,
-          "state": "open",
+          "state": "closed",
           "date": "2026-11-14"
         }
       ]
